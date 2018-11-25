@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50721
 File Encoding         : 65001
 
-Date: 2018-11-24 23:22:53
+Date: 2018-11-25 00:04:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,11 +28,11 @@ CREATE TABLE `t_user` (
   `gender` tinyint(1) DEFAULT '1' COMMENT '性别',
   `tell` varchar(18) COLLATE utf8_bin DEFAULT NULL COMMENT '电话',
   `email` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT '电子邮件',
-  `remark` varchar(1000) COLLATE utf8_bin DEFAULT NULL COMMENT '备注',
   `create_user` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '创建人',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_user` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '最后修改人',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(1000) COLLATE utf8_bin DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_account` (`account`) USING BTREE,
   KEY `idx_name` (`name`) USING BTREE
@@ -41,4 +41,4 @@ CREATE TABLE `t_user` (
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES ('1', '1', 'admin', '超管', '1', '1', null, null, '勿删', null, null, null, null);
+INSERT INTO `t_user` VALUES ('1', '1', 'admin', '超管', '1', '1', null, null, null, '2018-11-29 23:21:45', null, null, '勿删');

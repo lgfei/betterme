@@ -1,6 +1,8 @@
 package com.lgfei.betterself.framework.model;
 
-public interface IModel
+import java.io.Serializable;
+
+public interface IModel<K> extends Serializable
 {
     
 }

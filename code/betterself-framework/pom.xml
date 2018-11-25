@@ -24,7 +24,13 @@
       <groupId>org.springframework.boot</groupId>
 	   <artifactId>spring-boot-starter-web</artifactId>
 	</dependency>  
-	
+
+	<dependency>
+	    <groupId>org.mybatis</groupId>
+	    <artifactId>mybatis</artifactId>
+	    <version>3.4.6</version>
+	</dependency>
+		
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
