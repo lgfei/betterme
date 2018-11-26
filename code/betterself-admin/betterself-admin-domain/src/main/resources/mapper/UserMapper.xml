@@ -20,22 +20,22 @@
 		</if>
 	</sql>
 	
-	<select id="selectCount">
+	<select id="selectCount"  parameterType="HashMap" resultType="Integer">
 		select count(1) from t_user
 		where <include refid="conditions"/>
 	</select>
 	
-	<select id="selectByPage">
+	<select id="selectByPage" parameterType="HashMap" resultType="com.lgfei.betterself.admin.model.dto.UserDto">
 		select <include refid="colums_list"/>
 		from t_user
 		where <include refid="conditions"/>
 		limit #{page.start},#{page.end}
 	</select>
 	
-	<select id="selectById">
+	<select id="selectById" parameterType="HashMap" resultType="com.lgfei.betterself.admin.model.dto.UserDto">
 		select <include refid="colums_list"/>
 		from t_user
-		where id = #{params.id}
+		where id = #{id}
 	</select>
 	
 </mapper>
