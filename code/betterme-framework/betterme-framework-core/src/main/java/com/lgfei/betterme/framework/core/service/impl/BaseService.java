@@ -1,11 +1,11 @@
-package com.lgfei.betterself.framework.core.service.impl;
+package com.lgfei.betterme.framework.core.service.impl;
 
 import java.util.List;
 
-import com.lgfei.betterself.framework.core.repository.IRepository;
-import com.lgfei.betterself.framework.core.service.IService;
-import com.lgfei.betterself.framework.model.Query;
-import com.lgfei.betterself.framework.model.vo.PageVO;
+import com.lgfei.betterme.framework.core.repository.IRepository;
+import com.lgfei.betterme.framework.core.service.IService;
+import com.lgfei.betterme.framework.model.Query;
+import com.lgfei.betterme.framework.model.vo.PageVO;
 
 public abstract class BaseService<T, K> implements IService<T, K>
 {

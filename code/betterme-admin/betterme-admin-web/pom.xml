@@ -3,13 +3,13 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.lgfei.betterself</groupId>
-    <artifactId>betterself-admin</artifactId>
+    <groupId>com.lgfei.betterme</groupId>
+    <artifactId>betterme-admin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>betterself-admin-web</artifactId>
-  <name>betterself-admin-web</name>
+  <artifactId>betterme-admin-web</artifactId>
+  <name>betterme-admin-web</name>
   <url>http://maven.apache.org</url>
   
   <properties>
@@ -18,13 +18,13 @@
   
   <dependencies>
     <dependency>
-      <groupId>com.lgfei.betterself</groupId>
-      <artifactId>betterself-admin-model</artifactId>
+      <groupId>com.lgfei.betterme</groupId>
+      <artifactId>betterme-admin-model</artifactId>
       <version>${framework-version}</version>
     </dependency>
     <dependency>
-      <groupId>com.lgfei.betterself</groupId>
-      <artifactId>betterself-admin-domain</artifactId>
+      <groupId>com.lgfei.betterme</groupId>
+      <artifactId>betterme-admin-domain</artifactId>
       <version>${framework-version}</version>
     </dependency>      
   </dependencies>

@@ -1,10 +1,10 @@
-package com.lgfei.betterself.framework.core;
+package com.lgfei.betterme.framework.core;
 
 /**
  * Hello world!
  *
  */
-public class Configuration 
+public class Configuration
 {
-	
+    
 }

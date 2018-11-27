@@ -1,4 +1,4 @@
-package com.lgfei.betterself.admin.web;
+package com.lgfei.betterme.admin.web;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +12,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lgfei.betterself.admin.domain.manager.IUserManager;
+import com.lgfei.betterme.admin.domain.manager.IUserManager;
+import com.lgfei.betterme.admin.web.AdminWeApplication;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AdminWeApplication.class)

@@ -1,4 +1,4 @@
-package com.lgfei.betterself.admin.domain;
+package com.lgfei.betterme.admin.domain;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

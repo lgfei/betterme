@@ -1,4 +1,4 @@
-package com.lgfei.betterself.admin.model;
+package com.lgfei.betterme.admin.model;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
