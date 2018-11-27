@@ -1,2 +1,2 @@
-# betterself
-Better Self
+# betterme
+Better me
