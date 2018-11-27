@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- t_user表 -->
+<mapper namespace="com.lgfei.betterme.admin.domain.repository.IUserRepository">
+	<!-- 查询基础sql -->
+	<sql id="colums_list">
+		id,user_no,account,`name`,password,gender,tell,email,create_user,create_time,
+		update_user,update_time,remark
+	</sql>
+	
+	<sql id="conditions">
+		1=1
+		<if test="params != null">
+			<if test="params.id != null and params.id != ''">
+			 	AND id = #{params.id}
+			</if>
+			<if test="params.userNo != null and params.userNo != ''">
+			 	AND user_no = #{params.userNo}
+			</if>
+		</if>
+	</sql>
+	
+	<select id="selectCount"  parameterType="HashMap" resultType="Integer">
+		select count(1) from t_user
+		where <include refid="conditions"/>
+	</select>
+	
+	<select id="selectByPage" parameterType="HashMap" resultType="com.lgfei.betterme.admin.model.dto.UserDto">
+		select <include refid="colums_list"/>
+		from t_user
+		where <include refid="conditions"/>
+		limit #{page.start},#{page.end}
+	</select>
+	
+	<select id="selectById" parameterType="HashMap" resultType="com.lgfei.betterme.admin.model.dto.UserDto">
+		select <include refid="colums_list"/>
+		from t_user
+		where id = #{id}
+	</select>
+	
+</mapper>
