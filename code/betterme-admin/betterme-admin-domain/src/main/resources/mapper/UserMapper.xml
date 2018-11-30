@@ -29,7 +29,7 @@
 		select <include refid="colums_list"/>
 		from t_user
 		where <include refid="conditions"/>
-		limit #{page.start},#{page.end}
+		limit #{page.beginRowNum},#{page.pageSize}
 	</select>
 	
 	<select id="selectById" parameterType="HashMap" resultType="com.lgfei.betterme.admin.model.dto.UserDto">

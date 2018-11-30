@@ -2,13 +2,11 @@ package com.lgfei.betterme.framework.model.vo;
 
 public class PageVO
 {
-    private Integer pageSize;
+    private Integer pageSize = 10;
     
-    private Integer pageNum;
+    private Integer pageNum = 1;
     
-    private Integer start;
-    
-    private Integer end;
+    private Integer beginRowNum = (this.pageNum - 1) * pageSize;
     
     public Integer getPageSize()
     {
@@ -30,24 +28,9 @@ public class PageVO
         this.pageNum = pageNum;
     }
     
-    public Integer getStart()
+    public Integer getBeginRowNum()
     {
-        return start;
-    }
-    
-    public void setStart(Integer start)
-    {
-        this.start = start;
-    }
-    
-    public Integer getEnd()
-    {
-        return end;
-    }
-    
-    public void setEnd(Integer end)
-    {
-        this.end = end;
+        return beginRowNum;
     }
     
 }

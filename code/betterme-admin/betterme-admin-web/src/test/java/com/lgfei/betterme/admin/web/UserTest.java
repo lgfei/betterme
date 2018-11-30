@@ -5,30 +5,25 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lgfei.betterme.admin.domain.manager.IUserManager;
-import com.lgfei.betterme.admin.web.AdminWeApplication;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AdminWeApplication.class)
 @WebAppConfiguration
-public class AppTest
+public class UserTest
 {
-    @Autowired
-    IUserManager manager;
-    
     @Autowired
     private WebApplicationContext context;
     
     private MockMvc mockMvc;
-    
-    private ObjectMapper mapper = new ObjectMapper();
     
     @Before
     public void setupMockMvc()
@@ -38,17 +33,17 @@ public class AppTest
     }
     
     @Test
-    public void testSend()
+    public void testUserList()
         throws Exception
     {
-        /*        Long id = 1l;
         //调用接口，传入添加的用户参数
         mockMvc
-            .perform(MockMvcRequestBuilders.get("/user/list").contentType(MediaType.APPLICATION_JSON_UTF8).content(
-                mapper.writeValueAsString(id)))
+            .perform(MockMvcRequestBuilders.post("/user/list")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .param("pageNum", "1")
+                .param("pageSize", "10"))
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
-            .andDo(MockMvcResultHandlers.print());*/
-        System.out.println(manager.selectById("1").getData().getName());
+            .andDo(MockMvcResultHandlers.print());
     }
 }

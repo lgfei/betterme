@@ -1,6 +1,6 @@
 package com.lgfei.betterme.framework.model;
 
-public interface Numbers
+public interface MyNumbers
 {
     int ZERO = 0;
     

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.lgfei.betterme.framework.core.manager.IManager;
 import com.lgfei.betterme.framework.core.service.IService;
-import com.lgfei.betterme.framework.model.Numbers;
+import com.lgfei.betterme.framework.model.MyNumbers;
 import com.lgfei.betterme.framework.model.Query;
 import com.lgfei.betterme.framework.model.vo.PageResultVO;
 import com.lgfei.betterme.framework.model.vo.PageVO;
@@ -18,7 +18,7 @@ public abstract class BaseManager<T, K> implements IManager<T, K>
     public PageResultVO<T> selectByPage(Query query, PageVO page)
     {
         Integer total = getService().selectCount(query);
-        if (total == null || total.equals(Numbers.ZERO))
+        if (total == null || total.equals(MyNumbers.ZERO))
         {
             return new PageResultVO<T>();
         }

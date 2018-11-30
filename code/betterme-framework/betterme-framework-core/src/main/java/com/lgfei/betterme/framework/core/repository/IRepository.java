@@ -11,7 +11,7 @@ import com.lgfei.betterme.framework.model.vo.PageVO;
 @Mapper
 public interface IRepository<T, K>
 {
-    Integer selectCont(@Param("params") Map<String, Object> params);
+    Integer selectCount(@Param("params") Map<String, Object> params);
     
     List<T> selectByPage(@Param("params") Map<String, Object> params, @Param("page") PageVO page);
     

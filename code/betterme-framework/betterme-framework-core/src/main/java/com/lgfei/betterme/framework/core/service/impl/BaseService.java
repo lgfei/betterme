@@ -14,7 +14,7 @@ public abstract class BaseService<T, K> implements IService<T, K>
     @Override
     public Integer selectCount(Query query)
     {
-        return getRepository().selectCont(query.asMap());
+        return getRepository().selectCount(query.asMap());
     }
     
     @Override
