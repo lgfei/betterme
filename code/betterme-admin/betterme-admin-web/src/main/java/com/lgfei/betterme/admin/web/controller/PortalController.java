@@ -16,5 +16,4 @@ public class PortalController extends BaseController<Object, String>
     {
         return null;
     }
-    
 }
