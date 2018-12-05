@@ -10,11 +10,11 @@ import com.lgfei.betterme.framework.web.WebApplication;
 @SpringBootApplication
 @ComponentScan("com.lgfei.betterme.admin")
 @MapperScan("com.lgfei.betterme.admin.domain.dao")
-public class AdminWeApplication extends WebApplication
+public class AdminWebApplication extends WebApplication
 {
     public static void main(String[] args)
     {
-        SpringApplication app = new SpringApplication(AdminWeApplication.class);
+        SpringApplication app = new SpringApplication(AdminWebApplication.class);
         app.run(args);
     }
 }

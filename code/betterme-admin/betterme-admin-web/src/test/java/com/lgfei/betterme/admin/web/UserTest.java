@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = AdminWeApplication.class)
+@SpringBootTest(classes = AdminWebApplication.class)
 @WebAppConfiguration
 public class UserTest
 {
