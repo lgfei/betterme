@@ -2,31 +2,31 @@ package com.lgfei.betterme.framework.core.service.impl;
 
 import java.util.List;
 
-import com.lgfei.betterme.framework.core.repository.IRepository;
+import com.lgfei.betterme.framework.core.dao.IDao;
 import com.lgfei.betterme.framework.core.service.IService;
 import com.lgfei.betterme.framework.model.Query;
 import com.lgfei.betterme.framework.model.vo.PageVO;
 
 public abstract class BaseService<T, K> implements IService<T, K>
 {
-    protected abstract IRepository<T, K> getRepository();
+    protected abstract IDao<T, K> getDao();
     
     @Override
     public Integer selectCount(Query query)
     {
-        return getRepository().selectCount(query.asMap());
+        return getDao().selectCount(query.asMap());
     }
     
     @Override
     public List<T> selectByPage(Query query, PageVO page)
     {
-        return getRepository().selectByPage(query.asMap(), page);
+        return getDao().selectByPage(query.asMap(), page);
     }
     
     @Override
     public T selectById(K id)
     {
-        return getRepository().selectById(id);
+        return getDao().selectById(id);
     }
     
 }

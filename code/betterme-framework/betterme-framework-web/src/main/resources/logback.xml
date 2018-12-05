@@ -44,7 +44,4 @@
         <appender-ref ref="ERROR_FILE" />
     </root>
     
-    <!-- 日志打印SQL语句 --> 
-    <logger name="com.lgfei.betterself.framework.repository" level="DEBUG"></logger>
-    
 </configuration>

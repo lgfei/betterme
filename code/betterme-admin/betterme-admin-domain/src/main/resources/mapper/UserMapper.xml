@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!-- t_user表 -->
-<mapper namespace="com.lgfei.betterme.admin.domain.repository.IUserRepository">
+<mapper namespace="com.lgfei.betterme.admin.domain.dao.IUserDao">
 	<!-- 查询基础sql -->
 	<sql id="colums_list">
 		id,user_no,account,`name`,password,gender,tell,email,create_user,create_time,

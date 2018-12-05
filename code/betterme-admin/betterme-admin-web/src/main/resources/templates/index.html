@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8"/>
   <title>Betterme Admin</title>
-  <link href="http://127.0.01:8080/admin/css/app.css" rel="stylesheet"/>
+  <link th:href="${rootUrl}+'/css/app.css'" rel="stylesheet"/>
 </head>
 
 <body>
@@ -40,11 +40,13 @@
 	</form>  
   </div>
   <!-- 引入js -->
-  <script type="text/javascript" src="http://127.0.0.1:8080/admin/lib/jquery/3.3.1/jquery.js"></script>
-  <script type="text/javascript" src="http://127.0.0.1:8080/admin/lib/seajs/3.0.3/sea.js"></script>
-  <script type="text/javascript" src="http://127.0.0.1:8080/admin/lib/vuejs/2.5.17/vue.js"></script>
-  <script type="text/javascript">
-  	seajs.use("http://127.0.0.1:8080/admin/js/login.js");
+  <script type="text/javascript" th:src="${rootUrl}+'/lib/jquery/3.3.1/jquery.js'"></script>
+  <script type="text/javascript" th:src="${rootUrl}+'/lib/seajs/3.0.3/sea.js'"></script>
+  <script type="text/javascript" th:src="${rootUrl}+'/lib/vuejs/2.5.17/vue.js'"></script>
+  <script type="text/javascript" th:inline="javascript">
+  	$(function(){
+  		seajs.use([[${rootUrl}]] + "/js/login.js");
+  	});
   </script>
 </body>
 
