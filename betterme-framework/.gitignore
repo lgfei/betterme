@@ -1,0 +1,8 @@
+.project
+.classpath
+.gitignore
+*.class
+*.log
+*.temp
+target/
+.settings/
