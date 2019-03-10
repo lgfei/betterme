@@ -7,9 +7,9 @@
     <artifactId>betterme-admin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-
-  <artifactId>betterme-admin-api</artifactId>
-  <name>betterme-admin-api</name>
+  
+  <artifactId>betterme-admin-core</artifactId>
+  <name>betterme-admin-core</name>
   <url>http://maven.apache.org</url>
   
   <properties>
@@ -22,11 +22,6 @@
       <artifactId>betterme-admin-model</artifactId>
       <version>${framework-version}</version>
     </dependency>
-    <dependency>
-      <groupId>com.lgfei.betterme</groupId>
-      <artifactId>betterme-admin-core</artifactId>
-      <version>${framework-version}</version>
-    </dependency> 
   </dependencies>
   
 </project>

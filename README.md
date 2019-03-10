@@ -1,2 +1,2 @@
 # betterme
-Better me
+Better Me
