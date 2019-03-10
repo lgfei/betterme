@@ -8,8 +8,8 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   
-  <artifactId>betterme-admin-domain</artifactId>
-  <name>betterme-admin-domain</name>
+  <artifactId>betterme-admin-core</artifactId>
+  <name>betterme-admin-core</name>
   <url>http://maven.apache.org</url>
   
   <properties>

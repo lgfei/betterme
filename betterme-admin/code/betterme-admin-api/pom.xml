@@ -24,7 +24,7 @@
     </dependency>
     <dependency>
       <groupId>com.lgfei.betterme</groupId>
-      <artifactId>betterme-admin-domain</artifactId>
+      <artifactId>betterme-admin-core</artifactId>
       <version>${framework-version}</version>
     </dependency> 
   </dependencies>
