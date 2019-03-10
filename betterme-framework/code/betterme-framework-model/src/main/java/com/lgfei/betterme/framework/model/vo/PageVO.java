@@ -6,8 +6,6 @@ public class PageVO
     
     private Integer pageNum = 1;
     
-    private Integer beginRowNum = (this.pageNum - 1) * pageSize;
-    
     public Integer getPageSize()
     {
         return pageSize;
@@ -26,11 +24,6 @@ public class PageVO
     public void setPageNum(Integer pageNum)
     {
         this.pageNum = pageNum;
-    }
-    
-    public Integer getBeginRowNum()
-    {
-        return beginRowNum;
     }
     
 }

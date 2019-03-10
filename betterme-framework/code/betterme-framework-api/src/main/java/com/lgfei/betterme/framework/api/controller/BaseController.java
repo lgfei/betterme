@@ -1,4 +1,4 @@
-package com.lgfei.betterme.framework.web.controller;
+package com.lgfei.betterme.framework.api.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -6,16 +6,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lgfei.betterme.framework.core.manager.IBaseManager;
-import com.lgfei.betterme.framework.model.MyNumbers;
 import com.lgfei.betterme.framework.model.vo.PageResultVO;
+import com.lgfei.betterme.framework.model.vo.PageVO;
+
+import io.swagger.annotations.ApiOperation;
 
 public abstract class BaseController<T>
 {
     protected abstract IBaseManager<T> getManager();
     
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/", method = RequestMethod.GET)
     public String getTemplate()
     {
         RequestMapping requestMapping = this.getClass().getAnnotation(RequestMapping.class);
@@ -38,11 +39,13 @@ public abstract class BaseController<T>
             module = module.substring(MyNumbers.ONE);
         }
         return new StringBuilder(module).append("/index").toString();
-    }
+    }*/
     
+    @ApiOperation("分页查询")
     @ResponseBody
-    @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public PageResultVO<T> selectByPage(Page<T> page, @RequestParam(value = "ew") QueryWrapper<T> queryWrapper)
+    @RequestMapping(value = "/list", method = {RequestMethod.POST, RequestMethod.GET})
+    public PageResultVO<T> selectByPage(PageVO page,
+        @RequestParam(value = "ew", required = false) QueryWrapper<T> queryWrapper)
     {
         return getManager().selectPage(page, queryWrapper);
     }

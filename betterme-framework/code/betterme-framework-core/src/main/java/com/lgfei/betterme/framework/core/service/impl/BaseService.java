@@ -1,32 +1,10 @@
 package com.lgfei.betterme.framework.core.service.impl;
 
-import java.util.List;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.lgfei.betterme.framework.core.mpper.IBaseMapper;
+import com.lgfei.betterme.framework.core.service.IBaseService;
 
-import com.lgfei.betterme.framework.core.dao.IDao;
-import com.lgfei.betterme.framework.core.service.IService;
-import com.lgfei.betterme.framework.model.Query;
-import com.lgfei.betterme.framework.model.vo.PageVO;
-
-public abstract class BaseService<T, K> implements IService<T, K>
+public abstract class BaseService<T> extends ServiceImpl<IBaseMapper<T>, T> implements IBaseService<T>
 {
-    protected abstract IDao<T, K> getDao();
-    
-    @Override
-    public Integer selectCount(Query query)
-    {
-        return getDao().selectCount(query.asMap());
-    }
-    
-    @Override
-    public List<T> selectByPage(Query query, PageVO page)
-    {
-        return getDao().selectByPage(query.asMap(), page);
-    }
-    
-    @Override
-    public T selectById(K id)
-    {
-        return getDao().selectById(id);
-    }
-    
+    protected abstract IBaseMapper<T> getMapper();
 }
