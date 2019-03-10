@@ -2,7 +2,7 @@ package com.lgfei.betterme.admin.model.dto;
 
 import com.lgfei.betterme.framework.model.BaseModel;
 
-public class UserDto extends BaseModel<String>
+public class AdminUser extends BaseModel<String>
 {
     private static final long serialVersionUID = 7236620202550839441L;
     

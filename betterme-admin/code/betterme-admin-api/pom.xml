@@ -17,6 +17,16 @@
   </properties>
   
   <dependencies>
+    <dependency>
+      <groupId>com.lgfei.betterme</groupId>
+      <artifactId>betterme-admin-model</artifactId>
+      <version>${framework-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.lgfei.betterme</groupId>
+      <artifactId>betterme-admin-domain</artifactId>
+      <version>${framework-version}</version>
+    </dependency> 
   </dependencies>
   
 </project>

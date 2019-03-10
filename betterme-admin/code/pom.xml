@@ -38,17 +38,11 @@
   	  <artifactId>betterme-framework-util</artifactId>
   	  <version>${framework-version}</version>
   	</dependency>
-  	<dependency>
-  	  <groupId>com.lgfei.betterme</groupId>
-  	  <artifactId>betterme-framework-web</artifactId>
-  	  <version>${framework-version}</version>
-  	</dependency>
   </dependencies>
   
   <modules>
     <module>betterme-admin-api</module>
+    <module>betterme-admin-core</module>
     <module>betterme-admin-model</module>
-    <module>betterme-admin-web</module>
-    <module>betterme-admin-domain</module>
   </modules>
 </project>

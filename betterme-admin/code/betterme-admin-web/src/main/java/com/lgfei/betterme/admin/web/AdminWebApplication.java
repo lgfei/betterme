@@ -9,7 +9,7 @@ import com.lgfei.betterme.framework.web.WebApplication;
 
 @SpringBootApplication
 @ComponentScan("com.lgfei.betterme.admin")
-@MapperScan("com.lgfei.betterme.admin.domain.dao")
+@MapperScan("com.lgfei.betterme.admin.domain.mapper")
 public class AdminWebApplication extends WebApplication
 {
     public static void main(String[] args)
