@@ -2,17 +2,17 @@ package com.lgfei.betterme.framework.model.enums;
 
 public enum ResultCodeEnum
 {
-    SYSTEM_ERROR("-1", "system error"), SUCCESS("0", "success"), INVALID_PARAM("1", "invalid param"), NO_permission("2",
+    SYSTEM_ERROR("-1", "SYSTEM ERROR"), SUCCESS("0", "SUCCESS"), INVALID_PARAM("1", "INVALID PARAM"), NO_PERMISSION("2",
         "no permission");
     
     private String code;
     
-    private String desc;
+    private String msg;
     
-    private ResultCodeEnum(String code, String desc)
+    private ResultCodeEnum(String code, String msg)
     {
         this.code = code;
-        this.desc = desc;
+        this.msg = msg;
     }
     
     public String getCode()
@@ -20,8 +20,8 @@ public enum ResultCodeEnum
         return code;
     }
     
-    public String getDesc()
+    public String getMsg()
     {
-        return desc;
+        return msg;
     }
 }

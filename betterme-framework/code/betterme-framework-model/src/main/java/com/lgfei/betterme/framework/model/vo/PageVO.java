@@ -1,7 +1,9 @@
 package com.lgfei.betterme.framework.model.vo;
 
-public class PageVO
+public class PageVO implements IPageVO
 {
+    private static final long serialVersionUID = -8815856225820444736L;
+    
     private Integer pageSize = 10;
     
     private Integer pageNum = 1;

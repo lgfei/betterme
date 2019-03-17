@@ -2,8 +2,10 @@ package com.lgfei.betterme.framework.model.vo;
 
 import java.util.List;
 
-public class PageResultVO<T>
+public class PageResultVO<T> implements IResultVO
 {
+    private static final long serialVersionUID = -5099200433397582582L;
+    
     private List<T> rows;
     
     private Long total;
