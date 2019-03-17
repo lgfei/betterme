@@ -18,8 +18,8 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for `t_user`
 -- ----------------------------
-DROP TABLE IF EXISTS `t_user`;
-CREATE TABLE `t_user` (
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
   `id` varchar(32) COLLATE utf8_bin NOT NULL COMMENT '主键ID',
   `user_no` varchar(20) COLLATE utf8_bin NOT NULL COMMENT '用户编码',
   `account` varchar(20) COLLATE utf8_bin NOT NULL COMMENT '账号',
@@ -41,4 +41,4 @@ CREATE TABLE `t_user` (
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES ('1', '1', 'admin', '超管', '1', '1', null, null, null, '2018-11-29 23:21:45', null, null, '勿删');
+INSERT INTO `user` VALUES ('1', '1', 'admin', '超管', '1', '1', null, null, null, '2018-11-29 23:21:45', null, null, '勿删');

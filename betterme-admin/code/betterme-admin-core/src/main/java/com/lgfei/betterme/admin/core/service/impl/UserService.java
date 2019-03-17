@@ -3,20 +3,20 @@ package com.lgfei.betterme.admin.core.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lgfei.betterme.admin.core.mapper.IAdminUserMapper;
-import com.lgfei.betterme.admin.core.service.IAdminUserService;
-import com.lgfei.betterme.admin.model.dto.AdminUser;
+import com.lgfei.betterme.admin.core.mapper.IUserMapper;
+import com.lgfei.betterme.admin.core.service.IUserService;
+import com.lgfei.betterme.admin.model.User;
 import com.lgfei.betterme.framework.core.mpper.IBaseMapper;
 import com.lgfei.betterme.framework.core.service.impl.BaseService;
 
 @Service
-public class AdminUserService extends BaseService<AdminUser> implements IAdminUserService
+public class UserService extends BaseService<User> implements IUserService
 {
     @Autowired
-    private IAdminUserMapper mapper;
+    private IUserMapper mapper;
     
     @Override
-    protected IBaseMapper<AdminUser> getMapper()
+    protected IBaseMapper<User> getMapper()
     {
         return mapper;
     }

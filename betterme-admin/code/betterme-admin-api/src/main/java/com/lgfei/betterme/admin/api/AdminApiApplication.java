@@ -16,6 +16,6 @@ public class AdminApiApplication extends ApiApplication
     {
         SpringApplication app = new SpringApplication(AdminApiApplication.class);
         app.run(args);
-        System.err.println("http://localhost:8080//swagger-ui.html");
+        System.err.println("http://localhost:8080/swagger-ui.html");
     }
 }

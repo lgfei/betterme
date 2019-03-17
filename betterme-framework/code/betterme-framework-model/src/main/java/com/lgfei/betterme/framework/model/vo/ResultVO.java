@@ -18,7 +18,7 @@ public class ResultVO<T>
     {
         super();
         this.resultCode = ResultCodeEnum.SUCCESS.getCode();
-        this.resultMsg = ResultCodeEnum.SUCCESS.getDesc();
+        this.resultMsg = ResultCodeEnum.SUCCESS.getMsg();
     }
     
     public String getResultCode()
@@ -50,5 +50,4 @@ public class ResultVO<T>
     {
         this.data = data;
     }
-    
 }
