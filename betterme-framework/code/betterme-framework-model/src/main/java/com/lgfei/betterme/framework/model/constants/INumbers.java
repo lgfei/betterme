@@ -1,6 +1,6 @@
-package com.lgfei.betterme.framework.model;
+package com.lgfei.betterme.framework.model.constants;
 
-public interface MyNumbers
+public interface INumbers
 {
     int ZERO = 0;
     
@@ -23,5 +23,7 @@ public interface MyNumbers
     int NINE = 9;
     
     int TEN = 10;
+    
+    int ONE_HUNDED = 100;
     
 }
