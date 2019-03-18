@@ -12,7 +12,9 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lgfei.betterme.framework.core.manager.IBaseManager;
+import com.lgfei.betterme.framework.core.mpper.IBaseMapper;
 import com.lgfei.betterme.framework.core.service.IBaseService;
+import com.lgfei.betterme.framework.model.BaseModel;
 import com.lgfei.betterme.framework.model.enums.ResultCodeEnum;
 import com.lgfei.betterme.framework.model.exception.BaseRuntimeException;
 import com.lgfei.betterme.framework.model.vo.BatchDatasVO;
@@ -20,13 +22,13 @@ import com.lgfei.betterme.framework.model.vo.PageResultVO;
 import com.lgfei.betterme.framework.model.vo.PageVO;
 import com.lgfei.betterme.framework.model.vo.ResultVO;
 
-public abstract class BaseManager<I, T> implements IBaseManager<I, T>
+public abstract class BaseManager<M extends IBaseMapper<T>, T extends BaseModel<K>, K> implements IBaseManager<M, T, K>
 {
     private static final Logger LOG = LoggerFactory.getLogger(BaseManager.class);
     
     private static final int BATCH_SIZE = 1;
     
-    protected abstract IBaseService<I, T> getService();
+    protected abstract IBaseService<M, T, K> getService();
     
     protected abstract T newEntity();
     
@@ -51,7 +53,7 @@ public abstract class BaseManager<I, T> implements IBaseManager<I, T>
     @Override
     public Integer selectCount(T entity, String params)
     {
-        QueryWrapper<T> queryWrapper = new QueryWrapper<T>(entity);
+        QueryWrapper<T> queryWrapper = new QueryWrapper<>(entity);
         return getService().count(queryWrapper);
     }
     
@@ -69,7 +71,7 @@ public abstract class BaseManager<I, T> implements IBaseManager<I, T>
             return new PageResultVO<T>();
         }
         
-        PageResultVO<T> pageResultVo = new PageResultVO<T>();
+        PageResultVO<T> pageResultVo = new PageResultVO<>();
         pageResultVo.setTotal(rs.getTotal());
         pageResultVo.setRows(rs.getRecords());
         
@@ -79,14 +81,14 @@ public abstract class BaseManager<I, T> implements IBaseManager<I, T>
     @Override
     public List<T> select(T entity, String params)
     {
-        QueryWrapper<T> queryWrapper = new QueryWrapper<T>(entity);
+        QueryWrapper<T> queryWrapper = new QueryWrapper<>(entity);
         return getService().list(queryWrapper);
     }
     
     @Override
     public T selectOne(T entity, String params)
     {
-        QueryWrapper<T> queryWrapper = new QueryWrapper<T>(entity);
+        QueryWrapper<T> queryWrapper = new QueryWrapper<>(entity);
         return getService().getOne(queryWrapper);
     }
     
@@ -97,7 +99,9 @@ public abstract class BaseManager<I, T> implements IBaseManager<I, T>
         boolean flag = getService().save(entity);
         if (flag)
         {
-            result.setData(entity);
+            QueryWrapper<T> queryWrapper = new QueryWrapper<>(entity);
+            T dbEntity = getService().getOne(queryWrapper);
+            result.setData(dbEntity);
             return result;
         }
         return new ResultVO.Builder<T>().err();
@@ -110,7 +114,9 @@ public abstract class BaseManager<I, T> implements IBaseManager<I, T>
         boolean flag = getService().saveOrUpdate(entity);
         if (flag)
         {
-            result.setData(entity);
+            QueryWrapper<T> queryWrapper = new QueryWrapper<>(entity);
+            T dbEntity = getService().getOne(queryWrapper);
+            result.setData(dbEntity);
             return result;
         }
         return new ResultVO.Builder<T>().err();
@@ -120,13 +126,19 @@ public abstract class BaseManager<I, T> implements IBaseManager<I, T>
     public ResultVO<T> update(T entity, String params)
     {
         ResultVO<T> result = new ResultVO.Builder<T>().ok();
-        @SuppressWarnings("unchecked")
-        T wrapper = (T)huandleParams(params);
-        UpdateWrapper<T> updateWrapper = new UpdateWrapper<T>(wrapper);
+        if (null == entity.getId())
+        {
+            LOG.warn("entity.id is null");
+            return new ResultVO.Builder<T>().illegal();
+        }
+        T wrapper = newEntity();
+        wrapper.setId(entity.getId());
+        UpdateWrapper<T> updateWrapper = new UpdateWrapper<>(wrapper);
         boolean flag = getService().update(entity, updateWrapper);
         if (flag)
         {
-            result.setData(entity);
+            T dbEntity = getService().getOne(updateWrapper);
+            result.setData(dbEntity);
             return result;
         }
         return new ResultVO.Builder<T>().err();

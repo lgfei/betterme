@@ -11,13 +11,13 @@ import com.lgfei.betterme.framework.core.manager.impl.BaseManager;
 import com.lgfei.betterme.framework.core.service.IBaseService;
 
 @Service
-public class UserManager extends BaseManager<IUserMapper, User> implements IUserManager
+public class UserManager extends BaseManager<IUserMapper, User, Long> implements IUserManager
 {
     @Autowired
     private IUserService service;
     
     @Override
-    protected IBaseService<IUserMapper, User> getService()
+    protected IBaseService<IUserMapper, User, Long> getService()
     {
         return service;
     }

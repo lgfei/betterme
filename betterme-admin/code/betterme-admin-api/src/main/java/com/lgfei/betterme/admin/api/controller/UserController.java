@@ -15,13 +15,13 @@ import io.swagger.annotations.Api;
 @Api(description = "用户信息")
 @Controller
 @RequestMapping("/admin/user")
-public class UserController extends BaseController<IUserMapper, User>
+public class UserController extends BaseController<IUserMapper, User, Long>
 {
     @Autowired
     private IUserManager manager;
     
     @Override
-    protected IBaseManager<IUserMapper, User> getManager()
+    protected IBaseManager<IUserMapper, User, Long> getManager()
     {
         return manager;
     }
