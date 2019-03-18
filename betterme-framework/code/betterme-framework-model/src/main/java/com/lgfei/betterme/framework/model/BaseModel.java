@@ -1,6 +1,8 @@
 package com.lgfei.betterme.framework.model;
 
-public class BaseModel<K> implements IModel<K>
+import java.io.Serializable;
+
+public class BaseModel<K> implements Serializable
 {
     private static final long serialVersionUID = -8312345133182172608L;
     

@@ -4,7 +4,7 @@ import com.lgfei.betterme.admin.core.mapper.IUserMapper;
 import com.lgfei.betterme.admin.model.User;
 import com.lgfei.betterme.framework.core.manager.IBaseManager;
 
-public interface IUserManager extends IBaseManager<IUserMapper, User>
+public interface IUserManager extends IBaseManager<IUserMapper, User, Long>
 {
     
 }

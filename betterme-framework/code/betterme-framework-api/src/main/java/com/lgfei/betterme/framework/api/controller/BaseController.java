@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lgfei.betterme.framework.core.manager.IBaseManager;
+import com.lgfei.betterme.framework.core.mpper.IBaseMapper;
+import com.lgfei.betterme.framework.model.BaseModel;
 import com.lgfei.betterme.framework.model.constants.INumbers;
 import com.lgfei.betterme.framework.model.vo.BatchDatasVO;
 import com.lgfei.betterme.framework.model.vo.PageResultVO;
@@ -17,9 +19,9 @@ import com.lgfei.betterme.framework.model.vo.ResultVO;
 
 import io.swagger.annotations.ApiOperation;
 
-public abstract class BaseController<M, T>
+public abstract class BaseController<M extends IBaseMapper<T>, T extends BaseModel<K>, K>
 {
-    protected abstract IBaseManager<M, T> getManager();
+    protected abstract IBaseManager<M, T, K> getManager();
     
     protected abstract boolean preHandle(T entity, String params);
     

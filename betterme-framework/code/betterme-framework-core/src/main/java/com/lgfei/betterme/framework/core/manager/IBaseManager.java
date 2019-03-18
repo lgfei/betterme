@@ -7,7 +7,7 @@ import com.lgfei.betterme.framework.model.vo.PageResultVO;
 import com.lgfei.betterme.framework.model.vo.PageVO;
 import com.lgfei.betterme.framework.model.vo.ResultVO;
 
-public interface IBaseManager<I, T>
+public interface IBaseManager<M, T, K>
 {
     Integer selectCount(T entity, String params);
     

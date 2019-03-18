@@ -10,7 +10,7 @@ import com.lgfei.betterme.framework.core.mpper.IBaseMapper;
 import com.lgfei.betterme.framework.core.service.impl.BaseService;
 
 @Service
-public class UserService extends BaseService<IUserMapper, User> implements IUserService
+public class UserService extends BaseService<IUserMapper, User, Long> implements IUserService
 {
     @Autowired
     private IUserMapper mapper;
