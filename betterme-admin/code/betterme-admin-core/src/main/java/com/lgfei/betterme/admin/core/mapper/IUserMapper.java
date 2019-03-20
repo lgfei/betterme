@@ -6,7 +6,7 @@ import com.lgfei.betterme.admin.model.User;
 import com.lgfei.betterme.framework.core.mpper.IBaseMapper;
 
 @Mapper
-public interface IUserMapper extends IBaseMapper<User>
+public interface IUserMapper extends IBaseMapper<User, Long>
 {
     
 }

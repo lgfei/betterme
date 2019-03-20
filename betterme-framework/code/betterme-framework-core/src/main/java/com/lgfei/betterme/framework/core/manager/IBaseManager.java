@@ -2,13 +2,16 @@ package com.lgfei.betterme.framework.core.manager;
 
 import java.util.List;
 
+import com.lgfei.betterme.framework.core.service.IBaseService;
 import com.lgfei.betterme.framework.model.vo.BatchDatasVO;
 import com.lgfei.betterme.framework.model.vo.PageResultVO;
 import com.lgfei.betterme.framework.model.vo.PageVO;
 import com.lgfei.betterme.framework.model.vo.ResultVO;
 
-public interface IBaseManager<M, T, K>
+public interface IBaseManager<T, K>
 {
+    IBaseService<T, K> getService();
+    
     Integer selectCount(T entity, String params);
     
     PageResultVO<T> selectPage(T entity, PageVO page, String params);

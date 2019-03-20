@@ -3,13 +3,11 @@ package com.lgfei.betterme.framework.api.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lgfei.betterme.framework.api.IBaseController;
 import com.lgfei.betterme.framework.core.manager.IBaseManager;
-import com.lgfei.betterme.framework.core.mpper.IBaseMapper;
 import com.lgfei.betterme.framework.model.BaseModel;
 import com.lgfei.betterme.framework.model.constants.INumbers;
 import com.lgfei.betterme.framework.model.vo.BatchDatasVO;
@@ -17,17 +15,25 @@ import com.lgfei.betterme.framework.model.vo.PageResultVO;
 import com.lgfei.betterme.framework.model.vo.PageVO;
 import com.lgfei.betterme.framework.model.vo.ResultVO;
 
-import io.swagger.annotations.ApiOperation;
-
-public abstract class BaseController<M extends IBaseMapper<T>, T extends BaseModel<K>, K>
+public abstract class BaseController<MG extends IBaseManager<T, K>, T extends BaseModel<K>, K>
+    implements IBaseController<T, K>
 {
-    protected abstract IBaseManager<M, T, K> getManager();
+    @Autowired
+    protected MG manager;
     
-    protected abstract boolean preHandle(T entity, String params);
+    @Override
+    public IBaseManager<T, K> getManager()
+    {
+        return manager;
+    }
     
-    @ApiOperation("求总数")
-    @ResponseBody
-    @RequestMapping(value = "/count.json", method = {RequestMethod.POST, RequestMethod.GET})
+    @Override
+    public boolean preHandle(T entity, String params)
+    {
+        return true;
+    }
+    
+    @Override
     public Integer selectCount(T entity, String params)
     {
         boolean flag = preHandle(entity, params);
@@ -38,9 +44,7 @@ public abstract class BaseController<M extends IBaseMapper<T>, T extends BaseMod
         return INumbers.ZERO;
     }
     
-    @ApiOperation("分页查询")
-    @ResponseBody
-    @RequestMapping(value = "/page.json", method = {RequestMethod.POST, RequestMethod.GET})
+    @Override
     public PageResultVO<T> selectPage(T entity, PageVO page, String params)
     {
         boolean flag = preHandle(entity, params);
@@ -51,9 +55,7 @@ public abstract class BaseController<M extends IBaseMapper<T>, T extends BaseMod
         return new PageResultVO<>();
     }
     
-    @ApiOperation("普通查询")
-    @ResponseBody
-    @RequestMapping(value = "/select.json", method = {RequestMethod.POST, RequestMethod.GET})
+    @Override
     public List<T> select(T entity, String params)
     {
         boolean flag = preHandle(entity, params);
@@ -64,9 +66,7 @@ public abstract class BaseController<M extends IBaseMapper<T>, T extends BaseMod
         return new ArrayList<>();
     }
     
-    @ApiOperation("单个查询")
-    @ResponseBody
-    @RequestMapping(value = "/one.json", method = {RequestMethod.POST, RequestMethod.GET})
+    @Override
     public T selectOne(T entity, String params)
     {
         boolean flag = preHandle(entity, params);
@@ -77,9 +77,7 @@ public abstract class BaseController<M extends IBaseMapper<T>, T extends BaseMod
         return null;
     }
     
-    @ApiOperation("单个保存")
-    @ResponseBody
-    @RequestMapping(value = "/save.json", method = {RequestMethod.POST})
+    @Override
     public ResultVO<T> save(T entity, String params)
     {
         boolean flag = preHandle(entity, params);
@@ -90,9 +88,7 @@ public abstract class BaseController<M extends IBaseMapper<T>, T extends BaseMod
         return new ResultVO.Builder<T>().err();
     }
     
-    @ApiOperation("单个保存或修改")
-    @ResponseBody
-    @RequestMapping(value = "/saveOrUpdate.json", method = {RequestMethod.POST})
+    @Override
     public ResultVO<T> saveOrUpdate(T entity, String params)
     {
         boolean flag = preHandle(entity, params);
@@ -103,9 +99,7 @@ public abstract class BaseController<M extends IBaseMapper<T>, T extends BaseMod
         return new ResultVO.Builder<T>().err();
     }
     
-    @ApiOperation("单个修改")
-    @ResponseBody
-    @RequestMapping(value = "/update.json", method = {RequestMethod.POST})
+    @Override
     public ResultVO<T> update(T entity, String params)
     {
         boolean flag = preHandle(entity, params);
@@ -116,9 +110,7 @@ public abstract class BaseController<M extends IBaseMapper<T>, T extends BaseMod
         return new ResultVO.Builder<T>().err();
     }
     
-    @ApiOperation("删除")
-    @ResponseBody
-    @RequestMapping(value = "/remove.json", method = {RequestMethod.POST})
+    @Override
     public ResultVO<T> remove(T entity, String params)
     {
         boolean flag = preHandle(entity, params);
@@ -129,9 +121,7 @@ public abstract class BaseController<M extends IBaseMapper<T>, T extends BaseMod
         return new ResultVO.Builder<T>().err();
     }
     
-    @ApiOperation("批量保存(增删改)")
-    @ResponseBody
-    @RequestMapping(value = "/batchSave.json", method = {RequestMethod.POST})
+    @Override
     public ResultVO<T> batchSave(@RequestBody BatchDatasVO<T> datas, String params)
     {
         return getManager().batchSave(datas, params);
