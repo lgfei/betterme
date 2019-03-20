@@ -1,13 +1,22 @@
 package com.lgfei.betterme.framework.core.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lgfei.betterme.framework.core.mpper.IBaseMapper;
 import com.lgfei.betterme.framework.core.service.IBaseService;
 import com.lgfei.betterme.framework.model.BaseModel;
 
-public abstract class BaseService<M extends IBaseMapper<T>, T extends BaseModel<K>, K>
-    extends ServiceImpl<IBaseMapper<T>, T> implements IBaseService<M, T, K>
+public abstract class BaseService<M extends IBaseMapper<T, K>, T extends BaseModel<K>, K>
+    extends ServiceImpl<IBaseMapper<T, K>, T> implements IBaseService<T, K>
 {
-    protected abstract IBaseMapper<T> getMapper();
+    @Autowired
+    protected M mapper;
+    
+    @Override
+    public IBaseMapper<T, K> getMapper()
+    {
+        return mapper;
+    }
     
 }

@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 @Mapper
-public interface IBaseMapper<T> extends BaseMapper<T>
+public interface IBaseMapper<T, K> extends BaseMapper<T>
 {
     
 }
