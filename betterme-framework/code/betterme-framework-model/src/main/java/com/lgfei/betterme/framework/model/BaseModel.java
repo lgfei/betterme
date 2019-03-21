@@ -8,6 +8,8 @@ public class BaseModel<K> implements Serializable
     
     private K id;
     
+    private Integer status;
+    
     private String createUser;
     
     private String createTime;
@@ -26,6 +28,16 @@ public class BaseModel<K> implements Serializable
     public void setId(K id)
     {
         this.id = id;
+    }
+    
+    public Integer getStatus()
+    {
+        return status;
+    }
+    
+    public void setStatus(Integer status)
+    {
+        this.status = status;
     }
     
     public String getCreateUser()
