@@ -8,6 +8,7 @@ CREATE TABLE `user` (
   `gender` tinyint(1) DEFAULT '1' COMMENT '性别',
   `tell` varchar(18) COLLATE utf8_bin DEFAULT NULL COMMENT '电话',
   `email` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT '电子邮件',
+  `status` tinyint(3) NOT NULL DEFAULT '1' COMMENT '状态',
   `create_user` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '创建人',
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_user` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '最后修改人',
@@ -16,4 +17,4 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_account` (`account`) USING BTREE,
   KEY `idx_name` (`name`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户信息表';
