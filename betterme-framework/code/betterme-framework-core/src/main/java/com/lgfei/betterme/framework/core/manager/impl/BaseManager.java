@@ -14,7 +14,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lgfei.betterme.framework.core.manager.IBaseManager;
 import com.lgfei.betterme.framework.core.service.IBaseService;
-import com.lgfei.betterme.framework.model.entity.BaseModel;
+import com.lgfei.betterme.framework.model.entity.BaseEntity;
 import com.lgfei.betterme.framework.model.enums.ResultCodeEnum;
 import com.lgfei.betterme.framework.model.exception.BaseRuntimeException;
 import com.lgfei.betterme.framework.model.vo.BatchDatasVO;
@@ -22,7 +22,7 @@ import com.lgfei.betterme.framework.model.vo.PageResultVO;
 import com.lgfei.betterme.framework.model.vo.PageVO;
 import com.lgfei.betterme.framework.model.vo.ResultVO;
 
-public abstract class BaseManager<S extends IBaseService<T, K>, T extends BaseModel<K>, K> implements IBaseManager<T, K>
+public abstract class BaseManager<S extends IBaseService<T, K>, T extends BaseEntity<K>, K> implements IBaseManager<T, K>
 {
     private static final Logger LOG = LoggerFactory.getLogger(BaseManager.class);
     

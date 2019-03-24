@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.lgfei.betterme.framework.api.IBaseController;
 import com.lgfei.betterme.framework.core.manager.IBaseManager;
 import com.lgfei.betterme.framework.model.constants.INumbers;
-import com.lgfei.betterme.framework.model.entity.BaseModel;
+import com.lgfei.betterme.framework.model.entity.BaseEntity;
 import com.lgfei.betterme.framework.model.vo.BatchDatasVO;
 import com.lgfei.betterme.framework.model.vo.PageResultVO;
 import com.lgfei.betterme.framework.model.vo.PageVO;
 import com.lgfei.betterme.framework.model.vo.ResultVO;
 
-public abstract class BaseController<MG extends IBaseManager<T, K>, T extends BaseModel<K>, K>
+public abstract class BaseController<MG extends IBaseManager<T, K>, T extends BaseEntity<K>, K>
     implements IBaseController<T, K>
 {
     @Autowired

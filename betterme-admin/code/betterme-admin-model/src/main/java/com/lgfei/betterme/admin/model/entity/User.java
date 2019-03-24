@@ -1,8 +1,8 @@
 package com.lgfei.betterme.admin.model.entity;
 
-import com.lgfei.betterme.framework.model.entity.BaseModel;
+import com.lgfei.betterme.framework.model.entity.BaseEntity;
 
-public class User extends BaseModel<Long>
+public class User extends BaseEntity<Long>
 {
     private static final long serialVersionUID = 7236620202550839441L;
     
