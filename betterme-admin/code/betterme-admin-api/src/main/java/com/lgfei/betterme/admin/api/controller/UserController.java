@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lgfei.betterme.admin.core.manager.IUserManager;
-import com.lgfei.betterme.admin.model.User;
+import com.lgfei.betterme.admin.model.entity.User;
 import com.lgfei.betterme.framework.api.controller.BaseController;
 
 import io.swagger.annotations.Api;

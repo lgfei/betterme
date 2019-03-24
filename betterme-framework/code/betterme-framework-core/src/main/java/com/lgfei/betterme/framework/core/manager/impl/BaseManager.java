@@ -14,7 +14,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lgfei.betterme.framework.core.manager.IBaseManager;
 import com.lgfei.betterme.framework.core.service.IBaseService;
-import com.lgfei.betterme.framework.model.BaseModel;
+import com.lgfei.betterme.framework.model.entity.BaseModel;
 import com.lgfei.betterme.framework.model.enums.ResultCodeEnum;
 import com.lgfei.betterme.framework.model.exception.BaseRuntimeException;
 import com.lgfei.betterme.framework.model.vo.BatchDatasVO;

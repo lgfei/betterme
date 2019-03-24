@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lgfei.betterme.framework.core.mpper.IBaseMapper;
 import com.lgfei.betterme.framework.core.service.IBaseService;
-import com.lgfei.betterme.framework.model.BaseModel;
+import com.lgfei.betterme.framework.model.entity.BaseModel;
 
 public abstract class BaseService<M extends IBaseMapper<T, K>, T extends BaseModel<K>, K>
     extends ServiceImpl<IBaseMapper<T, K>, T> implements IBaseService<T, K>
