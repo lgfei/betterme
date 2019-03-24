@@ -1,6 +1,6 @@
-package com.lgfei.betterme.admin.model;
+package com.lgfei.betterme.admin.model.entity;
 
-import com.lgfei.betterme.framework.model.BaseModel;
+import com.lgfei.betterme.framework.model.entity.BaseModel;
 
 public class User extends BaseModel<Long>
 {

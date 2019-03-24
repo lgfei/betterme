@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.lgfei.betterme.admin.core.mapper.IUserMapper;
 import com.lgfei.betterme.admin.core.service.IUserService;
-import com.lgfei.betterme.admin.model.User;
+import com.lgfei.betterme.admin.model.entity.User;
 import com.lgfei.betterme.framework.core.service.impl.BaseService;
 
 @Service

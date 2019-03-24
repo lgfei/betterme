@@ -1,4 +1,4 @@
-package com.lgfei.betterme.framework.model;
+package com.lgfei.betterme.framework.model.entity;
 
 import java.io.Serializable;
 
