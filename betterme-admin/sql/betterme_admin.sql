@@ -1,3 +1,6 @@
+-- ----------------------------
+-- Table structure for `user`
+-- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
@@ -13,14 +16,15 @@ CREATE TABLE `user` (
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_user` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '最后修改人',
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `remark` varchar(1000) COLLATE utf8_bin DEFAULT NULL COMMENT '备注',
+  `remark` varchar(128) COLLATE utf8_bin DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_account` (`account`) USING BTREE,
   KEY `idx_name` (`name`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户信息表';
 
-----------------------------------------------------------------------------------------------------------
-
+-- ----------------------------
+-- Table structure for `operation_log`
+-- ----------------------------
 DROP TABLE IF EXISTS `operation_log`;
 CREATE TABLE `operation_log` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
@@ -33,7 +37,7 @@ CREATE TABLE `operation_log` (
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_user` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '最后修改人',
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `remark` varchar(1000) COLLATE utf8_bin DEFAULT NULL COMMENT '备注',
+  `remark` varchar(128) COLLATE utf8_bin DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_opt_no` (`opt_no`) USING BTREE,
   KEY `idx_opt_content` (`opt_content`) USING BTREE
