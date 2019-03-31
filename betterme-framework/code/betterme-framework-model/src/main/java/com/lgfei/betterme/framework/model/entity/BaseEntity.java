@@ -1,6 +1,7 @@
 package com.lgfei.betterme.framework.model.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class BaseEntity<K> implements Serializable
 {
@@ -12,11 +13,11 @@ public class BaseEntity<K> implements Serializable
     
     private String createUser;
     
-    private String createTime;
+    private Date createTime;
     
     private String updateUser;
     
-    private String updateTime;
+    private Date updateTime;
     
     private String remark;
     
@@ -50,12 +51,12 @@ public class BaseEntity<K> implements Serializable
         this.createUser = createUser;
     }
     
-    public String getCreateTime()
+    public Date getCreateTime()
     {
         return createTime;
     }
     
-    public void setCreateTime(String createTime)
+    public void setCreateTime(Date createTime)
     {
         this.createTime = createTime;
     }
@@ -70,12 +71,12 @@ public class BaseEntity<K> implements Serializable
         this.updateUser = updateUser;
     }
     
-    public String getUpdateTime()
+    public Date getUpdateTime()
     {
         return updateTime;
     }
     
-    public void setUpdateTime(String updateTime)
+    public void setUpdateTime(Date updateTime)
     {
         this.updateTime = updateTime;
     }
