@@ -9,7 +9,7 @@ import com.lgfei.betterme.framework.api.controller.BaseController;
 
 import io.swagger.annotations.Api;
 
-@Api(description = "用户信息")
+@Api(tags = {"用户信息表"})
 @Controller
 @RequestMapping("/admin/user")
 public class UserController extends BaseController<IUserManager, User, Long>
