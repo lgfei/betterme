@@ -22,9 +22,9 @@ import com.lgfei.betterme.framework.model.vo.PageResultVO;
 import com.lgfei.betterme.framework.model.vo.PageVO;
 import com.lgfei.betterme.framework.model.vo.ResultVO;
 
-public abstract class BaseManager<S extends IBaseService<T, K>, T extends BaseEntity<K>, K> implements IBaseManager<T, K>
+public abstract class BaseManagerImpl<S extends IBaseService<T, K>, T extends BaseEntity<K>, K> implements IBaseManager<T, K>
 {
-    private static final Logger LOG = LoggerFactory.getLogger(BaseManager.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BaseManagerImpl.class);
     
     private static final int BATCH_SIZE = 1;
     

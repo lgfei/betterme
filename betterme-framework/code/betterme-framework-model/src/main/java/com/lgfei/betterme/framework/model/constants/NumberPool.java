@@ -1,6 +1,6 @@
 package com.lgfei.betterme.framework.model.constants;
 
-public interface INumbers
+public interface NumberPool
 {
     int ZERO = 0;
     

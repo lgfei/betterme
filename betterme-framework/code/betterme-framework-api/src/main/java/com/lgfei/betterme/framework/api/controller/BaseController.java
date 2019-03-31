@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.lgfei.betterme.framework.api.IBaseController;
 import com.lgfei.betterme.framework.core.manager.IBaseManager;
-import com.lgfei.betterme.framework.model.constants.INumbers;
+import com.lgfei.betterme.framework.model.constants.NumberPool;
 import com.lgfei.betterme.framework.model.entity.BaseEntity;
 import com.lgfei.betterme.framework.model.vo.BatchDatasVO;
 import com.lgfei.betterme.framework.model.vo.PageResultVO;
@@ -41,7 +41,7 @@ public abstract class BaseController<MG extends IBaseManager<T, K>, T extends Ba
         {
             return getManager().selectCount(entity, params);
         }
-        return INumbers.ZERO;
+        return NumberPool.ZERO;
     }
     
     @Override
