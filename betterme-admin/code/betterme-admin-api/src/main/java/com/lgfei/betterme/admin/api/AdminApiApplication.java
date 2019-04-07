@@ -7,6 +7,14 @@ import org.springframework.context.annotation.ComponentScan;
 
 import com.lgfei.betterme.framework.api.ApiApplication;
 
+/**
+ * <p>
+ * api启动类
+ * </p>
+ *
+ * @author lgfei
+ * @since 2019-04-07
+ */
 @SpringBootApplication
 @ComponentScan("com.lgfei.betterme.admin")
 @MapperScan("com.lgfei.betterme.admin.core.mapper")
