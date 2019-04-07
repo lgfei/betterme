@@ -19,10 +19,10 @@ public class JasyptTest
     public void encry()
     {
         //加密root
-        String username = encryptor.encrypt("root");
+        String username = encryptor.encrypt("betterme");
         System.out.println(username);
         //加密123
-        String password = encryptor.encrypt("Admin.123");
+        String password = encryptor.encrypt("Betterme#1234");
         System.out.println(password);
     }
 }
