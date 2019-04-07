@@ -1,6 +1,5 @@
 package com.lgfei.betterme.admin.api.config;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,7 +15,6 @@ import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
  * @since  [产品/模块版本]
  */
 @Configuration
-@MapperScan("com.lgfei.betterme.admin.core.mapper")
 public class MybatisPlusConfig
 {
     
