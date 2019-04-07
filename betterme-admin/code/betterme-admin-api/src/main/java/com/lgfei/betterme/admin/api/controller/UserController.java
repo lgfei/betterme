@@ -11,7 +11,7 @@ import io.swagger.annotations.Api;
 
 @Api(tags = {"用户信息表"})
 @Controller
-@RequestMapping("/admin/user")
+@RequestMapping("/betterme-admin-api/user")
 public class UserController extends BaseController<IUserManager, User, Long>
 {
     
