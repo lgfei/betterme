@@ -8,8 +8,6 @@
   <settings>
 	<!-- 是否允许单一语句返回多结果集（需要兼容驱动）。 默认值true -->
 	<setting name="multipleResultSetsEnabled" value="true" />
-	<!--日志打印SQL语句 -->
-	<!-- <setting name="logImpl" value="LOG4J" /> -->
   </settings>
 
   <!-- 基础数据类型别名映射 -->
@@ -26,8 +24,8 @@
   
   <!-- 配置映射文件：用来配置sql语句和结果集类型等 -->
   <mappers>
-    <mapper resource="mapper/UserMapper.xml"/>
-    <mapper resource="mapper/OperationLogMapper.xml"/>
+          <mapper resource="mapper/OperationLogMapper.xml"/>
+      <mapper resource="mapper/UserMapper.xml"/>
   </mappers>
   
 </configuration>

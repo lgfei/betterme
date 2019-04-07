@@ -6,13 +6,12 @@ import org.springframework.context.annotation.Configuration;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 
 /**
- * <一句话功能简述>
- * <功能详细描述>
- * 
- * @author  lgfei
- * @version  [版本号, 2019年3月17日]
- * @see  [相关类/方法]
- * @since  [产品/模块版本]
+ * <p>
+ * mybatis-plus配置类
+ * </p>
+ *
+ * @author lgfei
+ * @since 2019-04-07
  */
 @Configuration
 public class MybatisPlusConfig

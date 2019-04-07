@@ -12,6 +12,14 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * <p>
+ * Swagger配置类
+ * </p>
+ *
+ * @author lgfei
+ * @since 2019-04-07
+ */
 @Configuration
 @EnableSwagger2
 public class Swagger2Config
@@ -29,11 +37,11 @@ public class Swagger2Config
     
     private ApiInfo apiInfo()
     {
-        return new ApiInfoBuilder().title("BetterMe-Admin APIs")
-            .description("BetterMe-Admin APIs")
+        return new ApiInfoBuilder().title("betterme-admin APIs")
+            .description("betterme-admin APIs")
             .termsOfServiceUrl("http://lgfei.com")
-            .contact(new Contact("lgfei", "http://lgfei.com", "longuofei@163.com"))
-            .version("1.0")
+            .contact(new Contact("lgfei", "http://lgfei.com", "email@xxx.com"))
+            .version("1.0.0")
             .build();
     }
     

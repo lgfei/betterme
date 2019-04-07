@@ -9,7 +9,7 @@ import com.lgfei.betterme.framework.core.manager.IBaseManager;
  * </p>
  *
  * @author lgfei
- * @since 2019-03-31
+ * @since 2019-04-07
  */
 public interface IOperationLogManager 
     extends IBaseManager<OperationLog, Long>

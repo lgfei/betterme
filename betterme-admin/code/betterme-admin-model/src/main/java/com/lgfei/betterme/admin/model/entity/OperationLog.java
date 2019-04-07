@@ -10,7 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author lgfei
- * @since 2019-03-31
+ * @since 2019-04-07
  */
 @ApiModel(value="OperationLog对象", description="操作日志表")
 public class OperationLog extends BaseEntity<Long>

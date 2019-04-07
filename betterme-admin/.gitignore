@@ -6,3 +6,4 @@
 *.temp
 target/
 .settings/
+code/*/bin
