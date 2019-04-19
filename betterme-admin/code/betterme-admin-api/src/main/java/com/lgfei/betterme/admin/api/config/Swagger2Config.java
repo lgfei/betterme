@@ -41,7 +41,7 @@ public class Swagger2Config
             .description("betterme-admin APIs")
             .termsOfServiceUrl("http://lgfei.com")
             .contact(new Contact("lgfei", "http://lgfei.com", "email@xxx.com"))
-            .version("1.0.0")
+            .version("0.0.1")
             .build();
     }
     

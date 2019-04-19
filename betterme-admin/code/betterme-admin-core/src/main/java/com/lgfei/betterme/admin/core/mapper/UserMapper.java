@@ -11,8 +11,7 @@ import com.lgfei.betterme.framework.core.mpper.IBaseMapper;
  * @author lgfei
  * @since 2019-04-07
  */
-public interface UserMapper 
-    extends IBaseMapper<User, Long> 
+public interface UserMapper extends IBaseMapper<User, Long>
 {
-
+    
 }
