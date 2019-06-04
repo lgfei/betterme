@@ -36,23 +36,23 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
-		<dependency>
-    		<groupId>mysql</groupId>
-    		<artifactId>mysql-connector-java</artifactId>
-		</dependency>
-
-        <!-- mybatis-plus -->
-		<dependency>
-		    <groupId>com.baomidou</groupId>
-		    <artifactId>mybatis-plus-boot-starter</artifactId>
-		    <version>3.1.0</version>
-		</dependency>
 
 		<dependency>
-		    <groupId>com.alibaba</groupId>
-		    <artifactId>fastjson</artifactId>
-		    <version>1.2.47</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<!-- mybatis-plus -->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-boot-starter</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.47</version>
 		</dependency>
 
 		<dependency>
@@ -60,26 +60,26 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- 加解密 -->
 		<dependency>
-            <groupId>com.github.ulisesbocchio</groupId>
-            <artifactId>jasypt-spring-boot-starter</artifactId>
-            <version>1.16</version>
-        </dependency>
+			<groupId>com.github.ulisesbocchio</groupId>
+			<artifactId>jasypt-spring-boot-starter</artifactId>
+			<version>1.16</version>
+		</dependency>
 
-        <!-- swaggerui相关依赖 -->
+		<!-- swaggerui相关依赖 -->
 		<dependency>
-           <groupId>io.springfox</groupId>
-           <artifactId>springfox-swagger2</artifactId>
-           <version>${swagger-version}</version>
-        </dependency>
-        <dependency>
-           <groupId>io.springfox</groupId>
-           <artifactId>springfox-swagger-ui</artifactId>
-           <version>${swagger-version}</version>
-        </dependency>
-        
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${swagger-version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -92,4 +92,17 @@
 		<module>betterme-framework-model</module>
 		<module>betterme-framework-util</module>
 	</modules>
+
+	<distributionManagement>
+		<repository>
+			<id>maven-releases</id>
+			<name>Maven Releases</name>
+			<url>http://192.168.126.10:8081/repository/maven-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>maven-snapshots</id>
+			<name>Maven Snapshots</name>
+			<url>http://192.168.126.10:8081/repository/maven-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>
