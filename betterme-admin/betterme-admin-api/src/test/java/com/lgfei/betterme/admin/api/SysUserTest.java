@@ -45,7 +45,7 @@ public class SysUserTest
     {
         //调用接口，传入添加的用户参数
         mockMvc
-            .perform(MockMvcRequestBuilders.post("/admin/user/save.json")
+            .perform(MockMvcRequestBuilders.post("/sys-user/save.json")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .param("userNo", "test_save")
                 .param("account", "test_save")
@@ -98,7 +98,7 @@ public class SysUserTest
         
         //调用接口，传入添加的用户参数
         mockMvc
-            .perform(MockMvcRequestBuilders.post("/admin/user/batchSave.json")
+            .perform(MockMvcRequestBuilders.post("/sys-user/batchSave.json")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(datasJson))
             .andExpect(MockMvcResultMatchers.status().isOk())
