@@ -71,21 +71,21 @@ public class SysUserTest
         insert1.setAccount("insert1");
         insert1.setName("insert1");
         insert1.setPassword("insert1");
-        List<User> inserted = new ArrayList<>();
+        List<SysUser> inserted = new ArrayList<>();
         inserted.add(insert0);
         inserted.add(insert1);
         
         SysUser update0 = new SysUser();
         update0.setId(1107679116171214849L);
         update0.setName("update0");
-        List<User> updated = new ArrayList<>();
+        List<SysUser> updated = new ArrayList<>();
         updated.add(update0);
         
         SysUser delete0 = new SysUser();
         delete0.setId(1L);
         SysUser delete1 = new SysUser();
         delete1.setId(2L);
-        List<User> deleted = new ArrayList<>();
+        List<SysUser> deleted = new ArrayList<>();
         deleted.add(delete0);
         deleted.add(delete1);
         
