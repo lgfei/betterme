@@ -1,6 +1,6 @@
 package com.lgfei.betterme.admin.core.manager;
 
-import com.lgfei.betterme.admin.model.entity.User;
+import com.lgfei.betterme.admin.model.entity.SysUser;
 import com.lgfei.betterme.framework.core.manager.IBaseManager;
 
 /**
@@ -9,10 +9,10 @@ import com.lgfei.betterme.framework.core.manager.IBaseManager;
  * </p>
  *
  * @author lgfei
- * @since 2019-04-07
+ * @since 2019-06-25
  */
-public interface IUserManager 
-    extends IBaseManager<User, Long>
+public interface ISysUserManager 
+    extends IBaseManager<SysUser, Long>
 {
     
 }

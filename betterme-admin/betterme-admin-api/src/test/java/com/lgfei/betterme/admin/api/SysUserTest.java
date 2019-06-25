@@ -19,13 +19,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.alibaba.fastjson.JSONArray;
-import com.lgfei.betterme.admin.model.entity.User;
+import com.lgfei.betterme.admin.model.entity.SysUser;
 import com.lgfei.betterme.framework.model.vo.BatchDatasVO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AdminApiApplication.class)
 @WebAppConfiguration
-public class UserTest
+public class SysUserTest
 {
     @Autowired
     private WebApplicationContext context;
@@ -61,12 +61,12 @@ public class UserTest
         throws Exception
     {
         // 构造参数
-        User insert0 = new User();
+        SysUser insert0 = new SysUser();
         insert0.setUserNo("insert0");
         insert0.setAccount("insert0");
         insert0.setName("insert0");
         insert0.setPassword("insert0");
-        User insert1 = new User();
+        SysUser insert1 = new SysUser();
         insert1.setUserNo("insert1");
         insert1.setAccount("insert1");
         insert1.setName("insert1");
@@ -75,21 +75,21 @@ public class UserTest
         inserted.add(insert0);
         inserted.add(insert1);
         
-        User update0 = new User();
+        SysUser update0 = new SysUser();
         update0.setId(1107679116171214849L);
         update0.setName("update0");
         List<User> updated = new ArrayList<>();
         updated.add(update0);
         
-        User delete0 = new User();
+        SysUser delete0 = new SysUser();
         delete0.setId(1L);
-        User delete1 = new User();
+        SysUser delete1 = new SysUser();
         delete1.setId(2L);
         List<User> deleted = new ArrayList<>();
         deleted.add(delete0);
         deleted.add(delete1);
         
-        BatchDatasVO<User> datas = new BatchDatasVO<>();
+        BatchDatasVO<SysUser> datas = new BatchDatasVO<>();
         datas.setInserted(inserted);
         datas.setUpdated(updated);
         datas.setDeleted(deleted);
