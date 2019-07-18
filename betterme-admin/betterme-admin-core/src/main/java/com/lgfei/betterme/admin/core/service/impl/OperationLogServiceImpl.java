@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author lgfei
- * @since 2019-04-07
+ * @since 2019-07-18
  */
 @Service
-public class OperationLogServiceImpl extends BaseServiceImpl<OperationLogMapper, OperationLog, Long>
-        implements IOperationLogService {
+public class OperationLogServiceImpl extends BaseServiceImpl<OperationLogMapper, OperationLog, Long> 
+    implements IOperationLogService {
 
 }

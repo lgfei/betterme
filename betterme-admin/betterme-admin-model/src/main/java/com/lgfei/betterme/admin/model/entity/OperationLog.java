@@ -1,7 +1,6 @@
 package com.lgfei.betterme.admin.model.entity;
 
 import com.lgfei.betterme.framework.model.entity.BaseEntity;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -11,10 +10,11 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author lgfei
- * @since 2019-04-07
+ * @since 2019-07-18
  */
-@ApiModel(value = "OperationLog对象", description = "操作日志表")
-public class OperationLog extends BaseEntity<Long> {
+@ApiModel(value="OperationLog对象", description="操作日志表")
+public class OperationLog extends BaseEntity<Long>
+{
 
     private static final long serialVersionUID = 1L;
 
@@ -37,7 +37,6 @@ public class OperationLog extends BaseEntity<Long> {
     public void setOptNo(String optNo) {
         this.optNo = optNo;
     }
-
     public Integer getOptType() {
         return optType;
     }
@@ -45,7 +44,6 @@ public class OperationLog extends BaseEntity<Long> {
     public void setOptType(Integer optType) {
         this.optType = optType;
     }
-
     public String getOptContent() {
         return optContent;
     }
@@ -53,7 +51,6 @@ public class OperationLog extends BaseEntity<Long> {
     public void setOptContent(String optContent) {
         this.optContent = optContent;
     }
-
     public String getModuleNo() {
         return moduleNo;
     }
@@ -64,7 +61,11 @@ public class OperationLog extends BaseEntity<Long> {
 
     @Override
     public String toString() {
-        return "OperationLog{" + "optNo=" + optNo + ", optType=" + optType + ", optContent=" + optContent
-                + ", moduleNo=" + moduleNo + "}";
+        return "OperationLog{" +
+        "optNo=" + optNo +
+        ", optType=" + optType +
+        ", optContent=" + optContent +
+        ", moduleNo=" + moduleNo +
+        "}";
     }
 }

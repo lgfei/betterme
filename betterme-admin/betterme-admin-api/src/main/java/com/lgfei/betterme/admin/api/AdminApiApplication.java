@@ -13,15 +13,16 @@ import com.lgfei.betterme.framework.api.ApiApplication;
  * </p>
  *
  * @author lgfei
- * @since 2019-04-07
+ * @since 2019-07-18
  */
 @SpringBootApplication
 @ComponentScan("com.lgfei.betterme.admin")
 @MapperScan("com.lgfei.betterme.admin.core.mapper")
 public class AdminApiApplication extends ApiApplication {
+    
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(AdminApiApplication.class);
         app.run(args);
-        System.err.println("http://localhost:8080/betterme-admin-api/swagger-ui.html");
+        System.err.println("http://127.0.0.1:8080/betterme-admin-api/swagger-ui.html");
     }
 }

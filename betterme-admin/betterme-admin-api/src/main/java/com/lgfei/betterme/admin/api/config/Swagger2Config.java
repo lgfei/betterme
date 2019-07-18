@@ -18,23 +18,28 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * </p>
  *
  * @author lgfei
- * @since 2019-04-07
+ * @since 2019-07-18
  */
 @Configuration
 @EnableSwagger2
 public class Swagger2Config {
-
+    
     @Bean
     public Docket createRestApi() {
-        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
-                .apis(RequestHandlerSelectors.basePackage("com.lgfei.betterme.admin.api")).paths(PathSelectors.any())
-                .build();
+        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
+            .select()
+            .apis(RequestHandlerSelectors.basePackage("com.lgfei.betterme.admin.api"))
+            .paths(PathSelectors.any())
+            .build();
     }
-
+    
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("betterme-admin APIs").description("betterme-admin APIs")
-                .termsOfServiceUrl("http://lgfei.com")
-                .contact(new Contact("lgfei", "http://lgfei.com", "email@xxx.com")).version("0.0.1").build();
+        return new ApiInfoBuilder().title("betterme-admin APIs")
+            .description("betterme-admin APIs")
+            .termsOfServiceUrl("http://lgfei.com")
+            .contact(new Contact("lgfei", "http://lgfei.com", "email@xxx.com"))
+            .version("1.0.0")
+            .build();
     }
-
+    
 }

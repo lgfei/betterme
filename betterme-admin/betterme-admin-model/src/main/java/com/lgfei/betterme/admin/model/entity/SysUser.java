@@ -10,10 +10,11 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author lgfei
- * @since 2019-06-25
+ * @since 2019-07-18
  */
 @ApiModel(value="SysUser对象", description="用户信息表")
-public class SysUser extends BaseEntity<Long> {
+public class SysUser extends BaseEntity<Long>
+{
 
     private static final long serialVersionUID = 1L;
 

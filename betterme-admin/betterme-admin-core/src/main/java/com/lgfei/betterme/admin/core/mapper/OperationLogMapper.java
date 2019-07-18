@@ -9,7 +9,7 @@ import com.lgfei.betterme.framework.core.mpper.IBaseMapper;
  * </p>
  *
  * @author lgfei
- * @since 2019-04-07
+ * @since 2019-07-18
  */
 public interface OperationLogMapper extends IBaseMapper<OperationLog, Long> {
 
