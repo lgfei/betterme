@@ -11,8 +11,6 @@ import com.lgfei.betterme.framework.core.mpper.IBaseMapper;
  * @author lgfei
  * @since 2019-06-25
  */
-public interface SysUserMapper 
-    extends IBaseMapper<SysUser, Long> 
-{
+public interface SysUserMapper extends IBaseMapper<SysUser, Long> {
 
 }

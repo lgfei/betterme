@@ -18,10 +18,8 @@ import com.lgfei.betterme.framework.api.ApiApplication;
 @SpringBootApplication
 @ComponentScan("com.lgfei.betterme.admin")
 @MapperScan("com.lgfei.betterme.admin.core.mapper")
-public class AdminApiApplication extends ApiApplication
-{
-    public static void main(String[] args)
-    {
+public class AdminApiApplication extends ApiApplication {
+    public static void main(String[] args) {
         SpringApplication app = new SpringApplication(AdminApiApplication.class);
         app.run(args);
         System.err.println("http://localhost:8080/betterme-admin-api/swagger-ui.html");

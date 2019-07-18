@@ -11,8 +11,6 @@ import com.lgfei.betterme.framework.core.service.IBaseService;
  * @author lgfei
  * @since 2019-06-25
  */
-public interface ISysUserService 
-    extends IBaseService<SysUser, Long> 
-{
+public interface ISysUserService extends IBaseService<SysUser, Long> {
 
 }

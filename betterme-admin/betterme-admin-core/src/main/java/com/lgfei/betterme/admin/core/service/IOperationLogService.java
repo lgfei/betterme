@@ -11,8 +11,6 @@ import com.lgfei.betterme.framework.core.service.IBaseService;
  * @author lgfei
  * @since 2019-04-07
  */
-public interface IOperationLogService 
-    extends IBaseService<OperationLog, Long> 
-{
+public interface IOperationLogService extends IBaseService<OperationLog, Long> {
 
 }

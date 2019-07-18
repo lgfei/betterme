@@ -9,19 +9,17 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AdminApiApplication.class)
-public class JasyptTest
-{
-    //注入StringEncryptor
+public class JasyptTest {
+    // 注入StringEncryptor
     @Autowired
     StringEncryptor encryptor;
-    
+
     @Test
-    public void encry()
-    {
-        //加密root
+    public void encry() {
+        // 加密root
         String username = encryptor.encrypt("betterme");
         System.out.println(username);
-        //加密123
+        // 加密123
         String password = encryptor.encrypt("Betterme#1234");
         System.out.println(password);
     }

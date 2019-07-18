@@ -20,46 +20,34 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.alibaba.fastjson.JSONArray;
 import com.lgfei.betterme.admin.model.entity.SysUser;
-import com.lgfei.betterme.framework.model.vo.BatchDatasVO;
+import com.lgfei.betterme.framework.model.vo.BatchRequestVO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AdminApiApplication.class)
 @WebAppConfiguration
-public class SysUserTest
-{
+public class SysUserTest {
     @Autowired
     private WebApplicationContext context;
-    
+
     private MockMvc mockMvc;
-    
+
     @Before
-    public void setupMockMvc()
-        throws Exception
-    {
+    public void setupMockMvc() throws Exception {
         mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
     }
-    
+
     @Test
-    public void test_save()
-        throws Exception
-    {
-        //调用接口，传入添加的用户参数
-        mockMvc
-            .perform(MockMvcRequestBuilders.post("/sys-user/save.json")
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .param("userNo", "test_save")
-                .param("account", "test_save")
-                .param("name", "test_save")
-                .param("password", "test_save"))
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
-            .andDo(MockMvcResultHandlers.print());
+    public void test_save() throws Exception {
+        // 调用接口，传入添加的用户参数
+        mockMvc.perform(MockMvcRequestBuilders.post("/sys-user/save.json").contentType(MediaType.APPLICATION_JSON_UTF8)
+                .param("userNo", "test_save").param("account", "test_save").param("name", "test_save")
+                .param("password", "test_save")).andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andDo(MockMvcResultHandlers.print());
     }
-    
+
     @Test
-    public void test_batchSave()
-        throws Exception
-    {
+    public void test_batchSave() throws Exception {
         // 构造参数
         SysUser insert0 = new SysUser();
         insert0.setUserNo("insert0");
@@ -74,13 +62,13 @@ public class SysUserTest
         List<SysUser> inserted = new ArrayList<>();
         inserted.add(insert0);
         inserted.add(insert1);
-        
+
         SysUser update0 = new SysUser();
         update0.setId(1107679116171214849L);
         update0.setName("update0");
         List<SysUser> updated = new ArrayList<>();
         updated.add(update0);
-        
+
         SysUser delete0 = new SysUser();
         delete0.setId(1L);
         SysUser delete1 = new SysUser();
@@ -88,21 +76,19 @@ public class SysUserTest
         List<SysUser> deleted = new ArrayList<>();
         deleted.add(delete0);
         deleted.add(delete1);
-        
-        BatchDatasVO<SysUser> datas = new BatchDatasVO<>();
+
+        BatchRequestVO<SysUser> datas = new BatchRequestVO<>();
         datas.setInserted(inserted);
         datas.setUpdated(updated);
         datas.setDeleted(deleted);
-        
+
         String datasJson = JSONArray.toJSONString(datas);
-        
-        //调用接口，传入添加的用户参数
-        mockMvc
-            .perform(MockMvcRequestBuilders.post("/sys-user/batchSave.json")
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content(datasJson))
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
-            .andDo(MockMvcResultHandlers.print());
+
+        // 调用接口，传入添加的用户参数
+        mockMvc.perform(MockMvcRequestBuilders.post("/sys-user/batchSave.json")
+                .contentType(MediaType.APPLICATION_JSON_UTF8).content(datasJson))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andDo(MockMvcResultHandlers.print());
     }
 }

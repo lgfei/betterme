@@ -15,9 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2019-06-25
  */
 @Service
-public class SysUserServiceImpl 
-    extends BaseServiceImpl<SysUserMapper, SysUser, Long> 
-    implements ISysUserService 
-{
+public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser, Long> implements ISysUserService {
 
 }
