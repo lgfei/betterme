@@ -14,9 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @since 2019-04-07
  */
 @ApiModel(value = "OperationLog对象", description = "操作日志表")
-public class OperationLog extends BaseEntity<Long>
-
-{
+public class OperationLog extends BaseEntity<Long> {
 
     private static final long serialVersionUID = 1L;
 

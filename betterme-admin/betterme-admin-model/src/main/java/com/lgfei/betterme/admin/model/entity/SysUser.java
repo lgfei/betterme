@@ -12,10 +12,8 @@ import io.swagger.annotations.ApiModelProperty;
  * @author lgfei
  * @since 2019-06-25
  */
-@ApiModel(value = "SysUser对象", description = "用户信息表")
-public class SysUser extends BaseEntity<Long>
-
-{
+@ApiModel(value="SysUser对象", description="用户信息表")
+public class SysUser extends BaseEntity<Long> {
 
     private static final long serialVersionUID = 1L;
 
@@ -47,7 +45,6 @@ public class SysUser extends BaseEntity<Long>
     public void setUserNo(String userNo) {
         this.userNo = userNo;
     }
-
     public String getAccount() {
         return account;
     }
@@ -55,7 +52,6 @@ public class SysUser extends BaseEntity<Long>
     public void setAccount(String account) {
         this.account = account;
     }
-
     public String getName() {
         return name;
     }
@@ -63,7 +59,6 @@ public class SysUser extends BaseEntity<Long>
     public void setName(String name) {
         this.name = name;
     }
-
     public String getPassword() {
         return password;
     }
@@ -71,7 +66,6 @@ public class SysUser extends BaseEntity<Long>
     public void setPassword(String password) {
         this.password = password;
     }
-
     public Boolean getGender() {
         return gender;
     }
@@ -79,7 +73,6 @@ public class SysUser extends BaseEntity<Long>
     public void setGender(Boolean gender) {
         this.gender = gender;
     }
-
     public String getTell() {
         return tell;
     }
@@ -87,7 +80,6 @@ public class SysUser extends BaseEntity<Long>
     public void setTell(String tell) {
         this.tell = tell;
     }
-
     public String getEmail() {
         return email;
     }
@@ -98,7 +90,14 @@ public class SysUser extends BaseEntity<Long>
 
     @Override
     public String toString() {
-        return "SysUser{" + "userNo=" + userNo + ", account=" + account + ", name=" + name + ", password=" + password
-                + ", gender=" + gender + ", tell=" + tell + ", email=" + email + "}";
+        return "SysUser{" +
+        "userNo=" + userNo +
+        ", account=" + account +
+        ", name=" + name +
+        ", password=" + password +
+        ", gender=" + gender +
+        ", tell=" + tell +
+        ", email=" + email +
+        "}";
     }
 }
