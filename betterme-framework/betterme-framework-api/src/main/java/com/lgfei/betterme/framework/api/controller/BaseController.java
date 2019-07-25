@@ -2,27 +2,32 @@ package com.lgfei.betterme.framework.api.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.lgfei.betterme.framework.api.IBaseController;
-import com.lgfei.betterme.framework.core.service.IBaseService;
 import com.lgfei.betterme.framework.common.constants.NumberPool;
 import com.lgfei.betterme.framework.common.entity.BaseEntity;
 import com.lgfei.betterme.framework.common.vo.BatchRequestVO;
 import com.lgfei.betterme.framework.common.vo.ListResponseVO;
 import com.lgfei.betterme.framework.common.vo.RequestVO;
 import com.lgfei.betterme.framework.common.vo.ResponseVO;
+import com.lgfei.betterme.framework.core.service.IBaseService;
 
-public abstract class BaseController<S extends IBaseService<T, K>, T extends BaseEntity<K>, K>
-        implements IBaseController<T, K> {
+import io.swagger.annotations.ApiOperation;
+
+public abstract class BaseController<S extends IBaseService<T, K>, T extends BaseEntity<K>, K> {
+    
     protected static final Logger LOG = LoggerFactory.getLogger(BaseController.class);
 
     private static final int BATCH_SIZE = 1;
@@ -31,23 +36,35 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
     protected S service;
 
     protected abstract T newEntity();
+    
+    protected RequestVO<T> reqData;
+    
+    protected BatchRequestVO<T> batchReqData;
 
-    @Override
-    public IBaseService<T, K> getService() {
+    protected IBaseService<T, K> getService() {
         return service;
     }
 
-    @Override
-    public boolean preHandle(RequestVO<T> reqData) {
+    protected boolean preHandle(HttpServletRequest req) {
+        System.out.println(req.getParameterNames());
+        if (null == reqData || null == reqData.getEntity()) {
+            return false;
+        }
+        return true;
+    }
+    
+    protected boolean preBatchHandle(HttpServletRequest req) {
         if (null == reqData || null == reqData.getEntity()) {
             return false;
         }
         return true;
     }
 
-    @Override
-    public Integer selectCount(RequestVO<T> reqData) {
-        boolean isPass = preHandle(reqData);
+    @ApiOperation("求总数")
+    @ResponseBody
+    @RequestMapping(value = "/count.json", method = { RequestMethod.POST, RequestMethod.GET })
+    public Integer selectCount(HttpServletRequest req) {
+        boolean isPass = preHandle(req);
         if (!isPass) {
             return NumberPool.ZERO;
         }
@@ -55,9 +72,11 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
         return getService().count(queryWrapper);
     }
 
-    @Override
-    public ListResponseVO<T> selectPage(RequestVO<T> reqData) {
-        boolean isPass = preHandle(reqData);
+    @ApiOperation("分页查询")
+    @ResponseBody
+    @RequestMapping(value = "/page.json", method = { RequestMethod.POST, RequestMethod.GET })
+    public ListResponseVO<T> selectPage(HttpServletRequest req) {
+        boolean isPass = preHandle(req);
         if (!isPass) {
             return new ListResponseVO.Builder<T>().illegal();
         }
@@ -78,9 +97,11 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
         return respData;
     }
 
-    @Override
-    public ListResponseVO<T> select(RequestVO<T> reqData) {
-        boolean isPass = preHandle(reqData);
+    @ApiOperation("普通查询")
+    @ResponseBody
+    @RequestMapping(value = "/select.json", method = { RequestMethod.POST, RequestMethod.GET })
+    public ListResponseVO<T> select(HttpServletRequest req) {
+        boolean isPass = preHandle(req);
         if (!isPass) {
             return new ListResponseVO.Builder<T>().illegal();
         }
@@ -94,9 +115,11 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
         return respData;
     }
 
-    @Override
-    public ResponseVO<T> selectOne(RequestVO<T> reqData) {
-        boolean isPass = preHandle(reqData);
+    @ApiOperation("单个查询")
+    @ResponseBody
+    @RequestMapping(value = "/one.json", method = { RequestMethod.POST, RequestMethod.GET })
+    public ResponseVO<T> selectOne(HttpServletRequest req) {
+        boolean isPass = preHandle(req);
         if (!isPass) {
             return new ResponseVO.Builder<T>().illegal();
         }
@@ -110,9 +133,11 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
         return respData;
     }
 
-    @Override
-    public ResponseVO<T> save(RequestVO<T> reqData) {
-        boolean isPass = preHandle(reqData);
+    @ApiOperation("单个保存")
+    @ResponseBody
+    @RequestMapping(value = "/save.json", method = { RequestMethod.POST })
+    public ResponseVO<T> save(HttpServletRequest req) {
+        boolean isPass = preHandle(req);
         if (!isPass) {
             return new ResponseVO.Builder<T>().illegal();
         }
@@ -129,9 +154,11 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
         return new ResponseVO.Builder<T>().err();
     }
 
-    @Override
-    public ResponseVO<T> saveOrUpdate(RequestVO<T> reqData) {
-        boolean isPass = preHandle(reqData);
+    @ApiOperation("单个保存或修改")
+    @ResponseBody
+    @RequestMapping(value = "/saveOrUpdate.json", method = { RequestMethod.POST })
+    public ResponseVO<T> saveOrUpdate(HttpServletRequest req) {
+        boolean isPass = preHandle(req);
         if (!isPass) {
             return new ResponseVO.Builder<T>().illegal();
         }
@@ -148,9 +175,11 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
         return new ResponseVO.Builder<T>().err();
     }
 
-    @Override
-    public ResponseVO<T> update(RequestVO<T> reqData) {
-        boolean isPass = preHandle(reqData);
+    @ApiOperation("单个修改")
+    @ResponseBody
+    @RequestMapping(value = "/update.json", method = { RequestMethod.POST })
+    public ResponseVO<T> update(HttpServletRequest req) {
+        boolean isPass = preHandle(req);
         if (!isPass) {
             return new ResponseVO.Builder<T>().illegal();
         }
@@ -173,9 +202,11 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
         return new ResponseVO.Builder<T>().err();
     }
 
-    @Override
-    public ResponseVO<T> remove(RequestVO<T> reqData) {
-        boolean isPass = preHandle(reqData);
+    @ApiOperation("删除")
+    @ResponseBody
+    @RequestMapping(value = "/remove.json", method = { RequestMethod.POST })
+    public ResponseVO<T> remove(HttpServletRequest req) {
+        boolean isPass = preHandle(req);
         if (!isPass) {
             return new ResponseVO.Builder<T>().illegal();
         }
@@ -191,14 +222,16 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
         return new ResponseVO.Builder<T>().err();
     }
 
-    @Override
-    public ResponseVO<T> batchSave(@RequestBody BatchRequestVO<T> reqData) {
-        if (null == reqData) {
-            LOG.warn("reqData is null");
+    @ApiOperation("批量保存(增删改)")
+    @ResponseBody
+    @RequestMapping(value = "/batchSave.json", method = { RequestMethod.POST })
+    public ResponseVO<T> batchSave(HttpServletRequest req) {
+        boolean isPass = preBatchHandle(req);
+        if (!isPass) {
             return new ResponseVO.Builder<T>().illegal();
         }
         // insert
-        List<T> inserted = reqData.getInserted();
+        List<T> inserted = batchReqData.getInserted();
         if (!CollectionUtils.isEmpty(inserted)) {
             /*
              * for (T entity : inserted){ getService().save(entity); }
@@ -216,7 +249,7 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
             } while (count < len);
         }
         // update
-        List<T> updated = reqData.getUpdated();
+        List<T> updated = batchReqData.getUpdated();
         if (!CollectionUtils.isEmpty(updated)) {
             /*
              * for (T entity : updated) { getService().updateById(entity); }
@@ -234,7 +267,7 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
             } while (count < len);
         }
         // delete
-        List<T> deleted = reqData.getDeleted();
+        List<T> deleted = batchReqData.getDeleted();
         if (!CollectionUtils.isEmpty(deleted)) {
             for (T entity : deleted) {
                 QueryWrapper<T> queryWrapper = new QueryWrapper<>(entity);
