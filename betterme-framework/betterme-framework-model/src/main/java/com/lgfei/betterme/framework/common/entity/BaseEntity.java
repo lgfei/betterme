@@ -1,4 +1,4 @@
-package com.lgfei.betterme.framework.model.entity;
+package com.lgfei.betterme.framework.common.entity;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lgfei.betterme.framework.core.service.IBaseService;
-import com.lgfei.betterme.framework.model.vo.BatchRequestVO;
-import com.lgfei.betterme.framework.model.vo.ListResponseVO;
-import com.lgfei.betterme.framework.model.vo.RequestVO;
-import com.lgfei.betterme.framework.model.vo.ResponseVO;
+import com.lgfei.betterme.framework.common.vo.BatchRequestVO;
+import com.lgfei.betterme.framework.common.vo.ListResponseVO;
+import com.lgfei.betterme.framework.common.vo.RequestVO;
+import com.lgfei.betterme.framework.common.vo.ResponseVO;
 
 import io.swagger.annotations.ApiOperation;
 

@@ -1,4 +1,4 @@
-package com.lgfei.betterme.framework.model.enums;
+package com.lgfei.betterme.framework.common.enums;
 
 public enum ResultCodeEnum {
     SYSTEM_ERROR("-1", "SYSTEM ERROR"), SUCCESS("0", "SUCCESS"), INVALID_PARAM("1", "INVALID PARAM"), NO_PERMISSION("2",

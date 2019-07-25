@@ -1,34 +1,28 @@
-package com.lgfei.betterme.framework.model.vo;
+package com.lgfei.betterme.framework.common.vo;
 
-import java.util.List;
+import com.lgfei.betterme.framework.common.enums.ResultCodeEnum;
 
-import com.lgfei.betterme.framework.model.enums.ResultCodeEnum;
+/**
+ * 返回页面结果
+ *
+ */
+public class ResponseVO<T> extends BaseResponseVO {
+    private static final long serialVersionUID = -8955803788318315741L;
 
-public class ListResponseVO<T> extends BaseResponseVO {
-    private static final long serialVersionUID = 1L;
+    private T data;
 
-    private Long count;
-
-    private List<T> data;
-
-    public Long getCount() {
-        return count;
-    }
-
-    public void setCount(Long count) {
-        this.count = count;
-    }
-
-    public List<T> getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(List<T> data) {
+    public void setData(T data) {
         this.data = data;
     }
 
-    private ListResponseVO(Builder<T> builder) {
+    private ResponseVO(Builder<T> builder) {
         super();
+        this.setCode(builder.code);
+        this.setMsg(builder.msg);
     }
 
     public static class Builder<T> {
@@ -46,23 +40,23 @@ public class ListResponseVO<T> extends BaseResponseVO {
             return this;
         }
 
-        public ListResponseVO<T> build() {
-            return new ListResponseVO<T>(this);
+        public ResponseVO<T> build() {
+            return new ResponseVO<T>(this);
         }
 
-        public ListResponseVO<T> ok() {
+        public ResponseVO<T> ok() {
             this.code(ResultCodeEnum.SUCCESS.getCode()).msg(ResultCodeEnum.SUCCESS.getMsg());
-            return new ListResponseVO<T>(this);
+            return new ResponseVO<T>(this);
         }
 
-        public ListResponseVO<T> err() {
+        public ResponseVO<T> err() {
             this.code(ResultCodeEnum.SYSTEM_ERROR.getCode()).msg(ResultCodeEnum.SYSTEM_ERROR.getMsg());
-            return new ListResponseVO<T>(this);
+            return new ResponseVO<T>(this);
         }
 
-        public ListResponseVO<T> illegal() {
+        public ResponseVO<T> illegal() {
             this.code(ResultCodeEnum.INVALID_PARAM.getCode()).msg(ResultCodeEnum.INVALID_PARAM.getMsg());
-            return new ListResponseVO<T>(this);
+            return new ResponseVO<T>(this);
         }
 
         public String getCode() {
@@ -82,4 +76,5 @@ public class ListResponseVO<T> extends BaseResponseVO {
         }
 
     }
+
 }

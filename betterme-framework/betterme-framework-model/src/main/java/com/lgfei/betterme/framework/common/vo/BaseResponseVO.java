@@ -1,4 +1,4 @@
-package com.lgfei.betterme.framework.model.vo;
+package com.lgfei.betterme.framework.common.vo;
 
 import java.util.Map;
 

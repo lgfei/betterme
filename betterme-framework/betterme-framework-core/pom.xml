@@ -19,7 +19,7 @@
   <dependencies>
   	<dependency>
   	  <groupId>com.lgfei</groupId>
-  	  <artifactId>betterme-framework-model</artifactId>
+  	  <artifactId>betterme-framework-common</artifactId>
   	  <version>${project-version}</version>
   	</dependency>  
   </dependencies>

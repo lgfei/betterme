@@ -1,6 +1,6 @@
 package com.lgfei.betterme.admin.model.entity;
 
-import com.lgfei.betterme.framework.model.entity.BaseEntity;
+import com.lgfei.betterme.framework.common.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

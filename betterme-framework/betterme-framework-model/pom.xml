@@ -8,8 +8,8 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   
-  <artifactId>betterme-framework-model</artifactId>
-  <name>betterme-framework-model</name>
+  <artifactId>betterme-framework-common</artifactId>
+  <name>betterme-framework-common</name>
   <url>http://maven.apache.org</url>
   
   <properties>

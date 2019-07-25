@@ -1,4 +1,4 @@
-package com.lgfei.betterme.framework.model;
+package com.lgfei.betterme.framework.common;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

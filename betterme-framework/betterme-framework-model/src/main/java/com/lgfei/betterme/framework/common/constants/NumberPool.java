@@ -1,4 +1,4 @@
-package com.lgfei.betterme.framework.model.constants;
+package com.lgfei.betterme.framework.common.constants;
 
 public interface NumberPool {
     int ZERO = 0;

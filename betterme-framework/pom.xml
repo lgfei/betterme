@@ -88,8 +88,8 @@
 
 	<modules>
 		<module>betterme-framework-api</module>
+		<module>betterme-framework-common</module>
 		<module>betterme-framework-core</module>
-		<module>betterme-framework-model</module>
 		<module>betterme-framework-util</module>
 	</modules>
 
