@@ -1,6 +1,6 @@
 package com.lgfei.betterme.admin.core.service.impl;
 
-import com.lgfei.betterme.admin.model.entity.SysUser;
+import com.lgfei.betterme.admin.common.entity.SysUser;
 import com.lgfei.betterme.admin.core.mapper.SysUserMapper;
 import com.lgfei.betterme.admin.core.service.ISysUserService;
 import com.lgfei.betterme.framework.core.service.impl.BaseServiceImpl;

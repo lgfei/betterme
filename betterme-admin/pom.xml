@@ -28,8 +28,8 @@
   
   <modules>
     <module>betterme-admin-api</module>
+	<module>betterme-admin-common</module>
     <module>betterme-admin-core</module>
-    <module>betterme-admin-model</module>
   </modules>
 
   <distributionManagement>

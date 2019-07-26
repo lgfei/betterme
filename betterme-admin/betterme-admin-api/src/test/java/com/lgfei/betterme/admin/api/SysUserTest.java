@@ -19,7 +19,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.alibaba.fastjson.JSONArray;
-import com.lgfei.betterme.admin.model.entity.SysUser;
+import com.lgfei.betterme.admin.common.entity.SysUser;
 import com.lgfei.betterme.framework.common.vo.BatchRequestVO;
 
 @RunWith(SpringRunner.class)

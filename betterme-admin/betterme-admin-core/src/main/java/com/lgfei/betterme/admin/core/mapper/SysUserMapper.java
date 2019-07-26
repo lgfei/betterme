@@ -1,6 +1,6 @@
 package com.lgfei.betterme.admin.core.mapper;
 
-import com.lgfei.betterme.admin.model.entity.SysUser;
+import com.lgfei.betterme.admin.common.entity.SysUser;
 import com.lgfei.betterme.framework.core.mpper.IBaseMapper;
 
 /**

@@ -1,6 +1,6 @@
 package com.lgfei.betterme.admin.core.service.impl;
 
-import com.lgfei.betterme.admin.model.entity.OperationLog;
+import com.lgfei.betterme.admin.common.entity.OperationLog;
 import com.lgfei.betterme.admin.core.mapper.OperationLogMapper;
 import com.lgfei.betterme.admin.core.service.IOperationLogService;
 import com.lgfei.betterme.framework.core.service.impl.BaseServiceImpl;

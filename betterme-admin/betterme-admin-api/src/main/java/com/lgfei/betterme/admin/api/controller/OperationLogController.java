@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import io.swagger.annotations.Api;
 
-import com.lgfei.betterme.admin.model.entity.OperationLog;
+import com.lgfei.betterme.admin.common.entity.OperationLog;
 import com.lgfei.betterme.admin.core.service.IOperationLogService;
 
 import com.lgfei.betterme.framework.api.controller.BaseController;
