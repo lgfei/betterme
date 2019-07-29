@@ -1,8 +1,7 @@
 package com.lgfei.betterme.framework.api.controller;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,33 +27,38 @@ import io.swagger.annotations.ApiOperation;
 
 public abstract class BaseController<S extends IBaseService<T, K>, T extends BaseEntity<K>, K> {
     
-    protected static final Logger LOG = LoggerFactory.getLogger(BaseController.class);
-
     private static final int BATCH_SIZE = 1;
-
-    @Autowired
-    protected S service;
+    
+    protected static final Logger LOG = LoggerFactory.getLogger(BaseController.class);
 
     protected abstract T newEntity();
     
-    protected RequestVO<T> reqData;
+    protected String entityClassName;
     
-    protected BatchRequestVO<T> batchReqData;
-
+    public BaseController() {
+        if (getClass().getGenericSuperclass() instanceof ParameterizedType) {
+            entityClassName = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1].getTypeName();
+        } else {
+            entityClassName = ((ParameterizedType) getClass().getSuperclass().getGenericSuperclass()).getActualTypeArguments()[1].getTypeName();
+        }
+   }
+    
+    @Autowired
+    protected S service;
+    
     protected IBaseService<T, K> getService() {
         return service;
     }
 
-    protected boolean preHandle(HttpServletRequest req) {
-        System.out.println(req.getParameterNames());
-        if (null == reqData || null == reqData.getEntity()) {
+    protected boolean preHandle(RequestVO<T> reqData) {
+        if (null == reqData) {
             return false;
         }
         return true;
     }
     
-    protected boolean preBatchHandle(HttpServletRequest req) {
-        if (null == reqData || null == reqData.getEntity()) {
+    protected boolean preBatchHandle(BatchRequestVO<T> batchReqData) {
+        if (null == batchReqData) {
             return false;
         }
         return true;
@@ -63,8 +67,8 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
     @ApiOperation("求总数")
     @ResponseBody
     @RequestMapping(value = "/count.json", method = { RequestMethod.POST, RequestMethod.GET })
-    public Integer selectCount(HttpServletRequest req) {
-        boolean isPass = preHandle(req);
+    public Integer selectCount(RequestVO<T> reqData) {
+        boolean isPass = preHandle(reqData);
         if (!isPass) {
             return NumberPool.ZERO;
         }
@@ -75,8 +79,8 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
     @ApiOperation("分页查询")
     @ResponseBody
     @RequestMapping(value = "/page.json", method = { RequestMethod.POST, RequestMethod.GET })
-    public ListResponseVO<T> selectPage(HttpServletRequest req) {
-        boolean isPass = preHandle(req);
+    public ListResponseVO<T> selectPage(RequestVO<T> reqData) {
+        boolean isPass = preHandle(reqData);
         if (!isPass) {
             return new ListResponseVO.Builder<T>().illegal();
         }
@@ -99,9 +103,9 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
 
     @ApiOperation("普通查询")
     @ResponseBody
-    @RequestMapping(value = "/select.json", method = { RequestMethod.POST, RequestMethod.GET })
-    public ListResponseVO<T> select(HttpServletRequest req) {
-        boolean isPass = preHandle(req);
+    @RequestMapping(value = "/list.json", method = { RequestMethod.POST, RequestMethod.GET })
+    public ListResponseVO<T> selectList(RequestVO<T> reqData) {
+        boolean isPass = preHandle(reqData);
         if (!isPass) {
             return new ListResponseVO.Builder<T>().illegal();
         }
@@ -118,8 +122,8 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
     @ApiOperation("单个查询")
     @ResponseBody
     @RequestMapping(value = "/one.json", method = { RequestMethod.POST, RequestMethod.GET })
-    public ResponseVO<T> selectOne(HttpServletRequest req) {
-        boolean isPass = preHandle(req);
+    public ResponseVO<T> selectOne(RequestVO<T> reqData) {
+        boolean isPass = preHandle(reqData);
         if (!isPass) {
             return new ResponseVO.Builder<T>().illegal();
         }
@@ -136,8 +140,8 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
     @ApiOperation("单个保存")
     @ResponseBody
     @RequestMapping(value = "/save.json", method = { RequestMethod.POST })
-    public ResponseVO<T> save(HttpServletRequest req) {
-        boolean isPass = preHandle(req);
+    public ResponseVO<T> save(RequestVO<T> reqData) {
+        boolean isPass = preHandle(reqData);
         if (!isPass) {
             return new ResponseVO.Builder<T>().illegal();
         }
@@ -157,8 +161,8 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
     @ApiOperation("单个保存或修改")
     @ResponseBody
     @RequestMapping(value = "/saveOrUpdate.json", method = { RequestMethod.POST })
-    public ResponseVO<T> saveOrUpdate(HttpServletRequest req) {
-        boolean isPass = preHandle(req);
+    public ResponseVO<T> saveOrUpdate(RequestVO<T> reqData) {
+        boolean isPass = preHandle(reqData);
         if (!isPass) {
             return new ResponseVO.Builder<T>().illegal();
         }
@@ -178,8 +182,8 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
     @ApiOperation("单个修改")
     @ResponseBody
     @RequestMapping(value = "/update.json", method = { RequestMethod.POST })
-    public ResponseVO<T> update(HttpServletRequest req) {
-        boolean isPass = preHandle(req);
+    public ResponseVO<T> update(RequestVO<T> reqData) {
+        boolean isPass = preHandle(reqData);
         if (!isPass) {
             return new ResponseVO.Builder<T>().illegal();
         }
@@ -205,8 +209,8 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
     @ApiOperation("删除")
     @ResponseBody
     @RequestMapping(value = "/remove.json", method = { RequestMethod.POST })
-    public ResponseVO<T> remove(HttpServletRequest req) {
-        boolean isPass = preHandle(req);
+    public ResponseVO<T> remove(RequestVO<T> reqData) {
+        boolean isPass = preHandle(reqData);
         if (!isPass) {
             return new ResponseVO.Builder<T>().illegal();
         }
@@ -225,8 +229,8 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
     @ApiOperation("批量保存(增删改)")
     @ResponseBody
     @RequestMapping(value = "/batchSave.json", method = { RequestMethod.POST })
-    public ResponseVO<T> batchSave(HttpServletRequest req) {
-        boolean isPass = preBatchHandle(req);
+    public ResponseVO<T> batchSave(BatchRequestVO<T> batchReqData) {
+        boolean isPass = preBatchHandle(batchReqData);
         if (!isPass) {
             return new ResponseVO.Builder<T>().illegal();
         }
@@ -277,15 +281,4 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
         return new ResponseVO.Builder<T>().ok();
     }
 
-    /*
-     * @RequestMapping(value = "/", method = RequestMethod.GET) public String
-     * getTemplate() { RequestMapping requestMapping =
-     * this.getClass().getAnnotation(RequestMapping.class); if (null ==
-     * requestMapping) { return "index"; } String[] values = requestMapping.value();
-     * if (null == values || values.length == MyNumbers.ZERO) { return "index"; }
-     * String module = values[0]; if (null == module || module.length() ==
-     * MyNumbers.ZERO) { return "index"; } if (module.startsWith("/")) { module =
-     * module.substring(MyNumbers.ONE); } return new
-     * StringBuilder(module).append("/index").toString(); }
-     */
 }

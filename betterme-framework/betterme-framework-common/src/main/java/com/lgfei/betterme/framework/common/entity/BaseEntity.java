@@ -8,7 +8,7 @@ public class BaseEntity<K> implements Serializable {
 
     private K id;
 
-    private Integer status;
+    private Integer enableFlag;
 
     private String createUser;
 
@@ -28,12 +28,12 @@ public class BaseEntity<K> implements Serializable {
         this.id = id;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getEnableFlag() {
+        return enableFlag;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setEnableFlag(Integer enableFlag) {
+        this.enableFlag = enableFlag;
     }
 
     public String getCreateUser() {
