@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
  * </p>
  *
  * @author lgfei
- * @since 2019-07-18
+ * @since 2019-07-29
  */
 @Configuration
 public class MybatisPlusConfig {

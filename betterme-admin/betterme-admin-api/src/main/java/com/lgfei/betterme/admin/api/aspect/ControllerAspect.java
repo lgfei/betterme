@@ -31,13 +31,11 @@ public class ControllerAspect {
 
     private static final Logger LOG = LoggerFactory.getLogger(ControllerAspect.class);
     
-    ThreadLocal<Long> startTime = new ThreadLocal<>();
-    
     public ControllerAspect() {
         LOG.info("init ControllerAspect...");
     }
     
-    @Pointcut("execution(public * com.lgfei.betterme.admin.api.controller.*Controller.*(..))")
+    @Pointcut("execution(public * com.lgfei..api.controller.*Controller.*(..))")
     public void excudeAspect() {}
     
     @Before("excudeAspect()")
@@ -58,7 +56,6 @@ public class ControllerAspect {
     @AfterThrowing("excudeAspect()")
     public void deAfterThrowing(JoinPoint joinPoint){
         LOG.info("deAfterThrowing");
-        
     }
 
     @Around("excudeAspect()")

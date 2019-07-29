@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author lgfei
- * @since 2019-07-18
+ * @since 2019-07-29
  */
 @Service
 public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser, Long> 

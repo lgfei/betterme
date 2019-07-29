@@ -18,7 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * </p>
  *
  * @author lgfei
- * @since 2019-07-18
+ * @since 2019-07-29
  */
 @Configuration
 @EnableSwagger2
@@ -36,8 +36,8 @@ public class Swagger2Config {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().title("betterme-admin APIs")
             .description("betterme-admin APIs")
-            .termsOfServiceUrl("http://lgfei.com")
-            .contact(new Contact("lgfei", "http://lgfei.com", "email@xxx.com"))
+            .termsOfServiceUrl("https://lgfei.github.io/")
+            .contact(new Contact("lgfei", "https://lgfei.github.io/", "email@xxx.com"))
             .version("1.0.0")
             .build();
     }

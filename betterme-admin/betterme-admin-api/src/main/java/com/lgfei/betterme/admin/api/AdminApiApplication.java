@@ -13,7 +13,7 @@ import com.lgfei.betterme.framework.api.ApiApplication;
  * </p>
  *
  * @author lgfei
- * @since 2019-07-18
+ * @since 2019-07-29
  */
 @SpringBootApplication
 @ComponentScan("com.lgfei.betterme.admin")

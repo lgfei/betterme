@@ -1,6 +1,6 @@
 package com.lgfei.betterme.admin.core.mapper;
 
-import com.lgfei.betterme.admin.common.entity.OperationLog;
+import com.lgfei.betterme.admin.common.entity.LogOperate;
 import com.lgfei.betterme.framework.core.mpper.IBaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.lgfei.betterme.framework.core.mpper.IBaseMapper;
  * </p>
  *
  * @author lgfei
- * @since 2019-07-18
+ * @since 2019-07-29
  */
-public interface OperationLogMapper extends IBaseMapper<OperationLog, Long> {
+public interface LogOperateMapper extends IBaseMapper<LogOperate, Long> {
 
 }

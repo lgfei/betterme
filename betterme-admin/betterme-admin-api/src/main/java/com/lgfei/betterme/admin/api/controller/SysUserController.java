@@ -3,11 +3,12 @@ package com.lgfei.betterme.admin.api.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+
 import com.lgfei.betterme.admin.common.entity.SysUser;
 import com.lgfei.betterme.admin.core.service.ISysUserService;
-import com.lgfei.betterme.framework.api.controller.BaseController;
 
-import io.swagger.annotations.Api;
+import com.lgfei.betterme.framework.api.controller.BaseController;
  
 /**
  * <p>
@@ -15,12 +16,12 @@ import io.swagger.annotations.Api;
  * </p>
  *
  * @author lgfei
- * @since 2019-07-18
+ * @since 2019-07-29
  */
 @Api(tags = {"用户信息表"})
 @RestController
 @RequestMapping("/sys-user")
-public class  SysUserController extends BaseController<ISysUserService,SysUser, Long> {
+public class  SysUserController extends BaseController<ISysUserService, SysUser, Long> {
     
     @Override
     protected SysUser newEntity() {

@@ -10,7 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author lgfei
- * @since 2019-07-18
+ * @since 2019-07-29
  */
 @ApiModel(value="SysUser对象", description="用户信息表")
 public class SysUser extends BaseEntity<Long>

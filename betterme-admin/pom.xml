@@ -28,20 +28,7 @@
   
   <modules>
     <module>betterme-admin-api</module>
-	<module>betterme-admin-common</module>
+    <module>betterme-admin-common</module>
     <module>betterme-admin-core</module>
   </modules>
-
-  <distributionManagement>
-    <repository>
-      <id>maven-releases</id>
-      <name>Maven Releases</name>
-      <url>http://192.168.126.10:8081/repository/maven-releases/</url>
-    </repository>
-    <snapshotRepository>
-      <id>maven-snapshots</id>
-      <name>Maven Snapshots</name>
-      <url>http://192.168.126.10:8081/repository/maven-snapshots/</url>
-    </snapshotRepository>
-  </distributionManagement>
 </project>
