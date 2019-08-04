@@ -3,9 +3,13 @@ package com.lgfei.betterme.framework.common.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 public class BaseEntity<K> implements Serializable {
     private static final long serialVersionUID = -8312345133182172608L;
 
+    @TableId(value = "id",type = IdType.AUTO)
     private K id;
 
     private Integer enableFlag;
