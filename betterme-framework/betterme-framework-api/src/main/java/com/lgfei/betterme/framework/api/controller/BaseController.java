@@ -16,9 +16,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.google.common.collect.Lists;
 import com.lgfei.betterme.framework.common.constants.NumberPool;
 import com.lgfei.betterme.framework.common.entity.BaseEntity;
 import com.lgfei.betterme.framework.common.vo.BatchRequestVO;
+import com.lgfei.betterme.framework.common.vo.ListRequestVO;
 import com.lgfei.betterme.framework.common.vo.ListResponseVO;
 import com.lgfei.betterme.framework.common.vo.RequestVO;
 import com.lgfei.betterme.framework.common.vo.ResponseVO;
@@ -32,8 +34,6 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
     
     protected static final Logger LOG = LoggerFactory.getLogger(BaseController.class);
 
-    protected abstract T newEntity();
-    
     protected String entityClassName;
     
     public BaseController() {
@@ -42,7 +42,18 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
         } else {
             entityClassName = ((ParameterizedType) getClass().getSuperclass().getGenericSuperclass()).getActualTypeArguments()[1].getTypeName();
         }
-   }
+    }
+    
+    protected abstract T newEntity();
+    
+    /**
+     * 新增时取系统编码规则，填充具体entity的业务编码
+     * @param entity
+     * @return
+     */
+    protected T fillNo(T entity) {
+        return entity;
+    }
     
     @Autowired
     protected S service;
@@ -58,7 +69,14 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
         return true;
     }
     
-    protected boolean preBatchHandle(BatchRequestVO<T> batchReqData) {
+    protected boolean preHandleList(ListRequestVO<T> listReqData) {
+        if (null == listReqData) {
+            return false;
+        }
+        return true;
+    }
+    
+    protected boolean preHandleBatch(BatchRequestVO<T> batchReqData) {
         if (null == batchReqData) {
             return false;
         }
@@ -148,7 +166,8 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
         }
 
         ResponseVO<T> respData = new ResponseVO.Builder<T>().ok();
-        boolean flag = getService().save(reqData.getEntity());
+        T entity = fillNo(reqData.getEntity());
+        boolean flag = getService().save(entity);
         if (flag) {
             QueryWrapper<T> queryWrapper = new QueryWrapper<>(reqData.getEntity());
             T dbEntity = getService().getOne(queryWrapper);
@@ -226,12 +245,39 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
         }
         return new ResponseVO.Builder<T>().err();
     }
+    
+    @ApiOperation("批量删除")
+    @ResponseBody
+    @RequestMapping(value = "/removeList.json", method = { RequestMethod.POST })
+    public ResponseVO<T> removeList(@RequestBody(required=false) ListRequestVO<T> listReqData) {
+        boolean isPass = preHandleList(listReqData);
+        if (!isPass) {
+            return new ResponseVO.Builder<T>().illegal();
+        }
+
+        List<T> entityList = listReqData.getEntityList();
+        if(CollectionUtils.isEmpty(entityList)) {
+            return new ResponseVO.Builder<T>().ok();
+        }
+        
+        List<K> idList = Lists.newLinkedList();
+        entityList.stream().forEach(entity -> {
+            idList.add(entity.getId());
+        });
+        QueryWrapper<T> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("id", idList);
+        boolean flag = getService().remove(queryWrapper);
+        if (flag) {
+            return new ResponseVO.Builder<T>().ok();
+        }
+        return new ResponseVO.Builder<T>().err();
+    }
 
     @ApiOperation("批量保存(增删改)")
     @ResponseBody
     @RequestMapping(value = "/batchSave.json", method = { RequestMethod.POST })
     public ResponseVO<T> batchSave(@RequestBody(required=false) BatchRequestVO<T> batchReqData) {
-        boolean isPass = preBatchHandle(batchReqData);
+        boolean isPass = preHandleBatch(batchReqData);
         if (!isPass) {
             return new ResponseVO.Builder<T>().illegal();
         }
