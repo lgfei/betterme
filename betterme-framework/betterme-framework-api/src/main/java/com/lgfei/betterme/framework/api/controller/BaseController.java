@@ -1,6 +1,5 @@
 package com.lgfei.betterme.framework.api.controller;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -19,7 +19,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.collect.Lists;
 import com.lgfei.betterme.framework.common.constants.NumberPool;
 import com.lgfei.betterme.framework.common.entity.BaseEntity;
+import com.lgfei.betterme.framework.common.enums.MethodTypeEnum;
 import com.lgfei.betterme.framework.common.vo.BatchRequestVO;
+import com.lgfei.betterme.framework.common.vo.IRequestVO;
 import com.lgfei.betterme.framework.common.vo.ListRequestVO;
 import com.lgfei.betterme.framework.common.vo.ListResponseVO;
 import com.lgfei.betterme.framework.common.vo.RequestVO;
@@ -34,7 +36,7 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
     
     protected static final Logger LOG = LoggerFactory.getLogger(BaseController.class);
 
-    protected String entityClassName;
+    /*protected String entityClassName;
     
     public BaseController() {
         if (getClass().getGenericSuperclass() instanceof ParameterizedType) {
@@ -42,7 +44,7 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
         } else {
             entityClassName = ((ParameterizedType) getClass().getSuperclass().getGenericSuperclass()).getActualTypeArguments()[1].getTypeName();
         }
-    }
+    }*/
     
     protected abstract T newEntity();
     
@@ -61,37 +63,58 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
     protected IBaseService<T, K> getService() {
         return service;
     }
-
-    protected boolean preHandle(RequestVO<T> reqData) {
-        if (null == reqData) {
-            return false;
-        }
-        return true;
-    }
     
-    protected boolean preHandleList(ListRequestVO<T> listReqData) {
-        if (null == listReqData) {
-            return false;
-        }
-        return true;
-    }
-    
-    protected boolean preHandleBatch(BatchRequestVO<T> batchReqData) {
-        if (null == batchReqData) {
+    protected boolean checkParams(IRequestVO reqData) {
+        if(null == reqData) {
             return false;
         }
         return true;
     }
 
+    @SuppressWarnings("unchecked")
+    protected Wrapper<T> preHandle(IRequestVO reqData, String methodType) {
+        if(reqData instanceof RequestVO) {
+            RequestVO<T> vo = (RequestVO<T>) reqData;
+            if(MethodTypeEnum.UPDATE.getCode().equals(methodType)) {
+                T entity = newEntity();
+                entity.setId(vo.getEntity().getId());
+                return new UpdateWrapper<>(entity);
+            }
+            return new QueryWrapper<>(vo.getEntity());
+        }else if(reqData instanceof ListRequestVO) {
+            ListRequestVO<T> vo = (ListRequestVO<T>) reqData;
+            List<T> entityList = vo.getEntityList();
+            if(CollectionUtils.isEmpty(entityList)) {
+                LOG.warn("无法获取entityList");
+                return null;
+            }
+            
+            List<K> idList = Lists.newLinkedList();
+            entityList.stream().forEach(entity -> {
+                idList.add(entity.getId());
+            });
+           
+            QueryWrapper<T> queryWrapper = new QueryWrapper<>();
+            queryWrapper.in("id", idList);
+            return queryWrapper;
+        }else {
+            LOG.warn("不支持的参数类型");
+            return null;
+        }
+    }
+    
     @ApiOperation("求总数")
     @ResponseBody
     @RequestMapping(value = "/count.json", method = { RequestMethod.POST, RequestMethod.GET })
     public Integer selectCount(@RequestBody(required=false) RequestVO<T> reqData) {
-        boolean isPass = preHandle(reqData);
+        boolean isPass = checkParams(reqData);
         if (!isPass) {
             return NumberPool.ZERO;
         }
-        QueryWrapper<T> queryWrapper = new QueryWrapper<>(reqData.getEntity());
+        Wrapper<T> queryWrapper = preHandle(reqData, MethodTypeEnum.QUERY.getCode());
+        if(null == queryWrapper) {
+            return NumberPool.ZERO;
+        }
         return getService().count(queryWrapper);
     }
 
@@ -99,15 +122,20 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
     @ResponseBody
     @RequestMapping(value = "/page.json", method = { RequestMethod.POST, RequestMethod.GET })
     public ListResponseVO<T> selectPage(@RequestBody(required=false) RequestVO<T> reqData) {
-        boolean isPass = preHandle(reqData);
+        boolean isPass = checkParams(reqData);
         if (!isPass) {
             return new ListResponseVO.Builder<T>().illegal();
         }
+       
         Page<T> pg = new Page<>();
         pg.setSize(reqData.getLimit());
         pg.setCurrent(reqData.getPage());
 
-        QueryWrapper<T> queryWrapper = new QueryWrapper<>(reqData.getEntity());
+        Wrapper<T> queryWrapper = preHandle(reqData, MethodTypeEnum.QUERY.getCode());
+        if(null == queryWrapper) {
+            return new ListResponseVO.Builder<T>().ok();
+        }
+        
         IPage<T> rs = getService().page(pg, queryWrapper);
         if (null == rs) {
             return new ListResponseVO.Builder<T>().ok();
@@ -124,12 +152,15 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
     @ResponseBody
     @RequestMapping(value = "/list.json", method = { RequestMethod.POST, RequestMethod.GET })
     public ListResponseVO<T> selectList(@RequestBody(required=false) RequestVO<T> reqData) {
-        boolean isPass = preHandle(reqData);
+        boolean isPass = checkParams(reqData);
         if (!isPass) {
             return new ListResponseVO.Builder<T>().illegal();
         }
 
-        QueryWrapper<T> queryWrapper = new QueryWrapper<>(reqData.getEntity());
+        Wrapper<T> queryWrapper = preHandle(reqData, MethodTypeEnum.QUERY.getCode());
+        if(null == queryWrapper) {
+            return new ListResponseVO.Builder<T>().ok();
+        }
         List<T> data = getService().list(queryWrapper);
 
         ListResponseVO<T> respData = new ListResponseVO.Builder<T>().ok();
@@ -142,12 +173,15 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
     @ResponseBody
     @RequestMapping(value = "/one.json", method = { RequestMethod.POST, RequestMethod.GET })
     public ResponseVO<T> selectOne(@RequestBody(required=false) RequestVO<T> reqData) {
-        boolean isPass = preHandle(reqData);
+        boolean isPass = checkParams(reqData);
         if (!isPass) {
             return new ResponseVO.Builder<T>().illegal();
         }
 
-        QueryWrapper<T> queryWrapper = new QueryWrapper<>(reqData.getEntity());
+        Wrapper<T> queryWrapper = preHandle(reqData, MethodTypeEnum.QUERY.getCode());
+        if(null == queryWrapper) {
+            return new ResponseVO.Builder<T>().ok();
+        }
         T data = getService().getOne(queryWrapper);
 
         ResponseVO<T> respData = new ResponseVO.Builder<T>().ok();
@@ -160,17 +194,21 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
     @ResponseBody
     @RequestMapping(value = "/save.json", method = { RequestMethod.POST })
     public ResponseVO<T> save(@RequestBody(required=false) RequestVO<T> reqData) {
-        boolean isPass = preHandle(reqData);
+        boolean isPass = checkParams(reqData);
         if (!isPass) {
             return new ResponseVO.Builder<T>().illegal();
         }
 
-        ResponseVO<T> respData = new ResponseVO.Builder<T>().ok();
         T entity = fillNo(reqData.getEntity());
         boolean flag = getService().save(entity);
         if (flag) {
-            QueryWrapper<T> queryWrapper = new QueryWrapper<>(reqData.getEntity());
+            Wrapper<T> queryWrapper = preHandle(reqData, MethodTypeEnum.QUERY.getCode());
+            if(null == queryWrapper) {
+                return new ResponseVO.Builder<T>().ok();
+            }
             T dbEntity = getService().getOne(queryWrapper);
+            
+            ResponseVO<T> respData = new ResponseVO.Builder<T>().ok();
             respData.setData(dbEntity);
 
             return respData;
@@ -182,16 +220,20 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
     @ResponseBody
     @RequestMapping(value = "/saveOrUpdate.json", method = { RequestMethod.POST })
     public ResponseVO<T> saveOrUpdate(@RequestBody(required=false) RequestVO<T> reqData) {
-        boolean isPass = preHandle(reqData);
+        boolean isPass = checkParams(reqData);
         if (!isPass) {
             return new ResponseVO.Builder<T>().illegal();
         }
 
-        ResponseVO<T> respData = new ResponseVO.Builder<T>().ok();
         boolean flag = getService().saveOrUpdate(reqData.getEntity());
         if (flag) {
-            QueryWrapper<T> queryWrapper = new QueryWrapper<>(reqData.getEntity());
+            Wrapper<T> queryWrapper = preHandle(reqData, MethodTypeEnum.QUERY.getCode());
+            if(null == queryWrapper) {
+                return new ResponseVO.Builder<T>().ok();
+            }
             T dbEntity = getService().getOne(queryWrapper);
+            
+            ResponseVO<T> respData = new ResponseVO.Builder<T>().ok();
             respData.setData(dbEntity);
 
             return respData;
@@ -203,25 +245,29 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
     @ResponseBody
     @RequestMapping(value = "/update.json", method = { RequestMethod.POST })
     public ResponseVO<T> update(@RequestBody(required=false) RequestVO<T> reqData) {
-        boolean isPass = preHandle(reqData);
+        boolean isPass = checkParams(reqData);
         if (!isPass) {
             return new ResponseVO.Builder<T>().illegal();
         }
+        
         T entity = reqData.getEntity();
         if (null == entity.getId()) {
             LOG.warn("entity.id is null");
             return new ResponseVO.Builder<T>().illegal();
         }
-        T wrapper = newEntity();
-        wrapper.setId(entity.getId());
-        UpdateWrapper<T> updateWrapper = new UpdateWrapper<>(wrapper);
+        
+        Wrapper<T> updateWrapper = preHandle(reqData, MethodTypeEnum.UPDATE.getCode());
+        if(null == updateWrapper) {
+            return new ResponseVO.Builder<T>().ok();
+        }
         boolean flag = getService().update(entity, updateWrapper);
         if (flag) {
             T dbEntity = getService().getOne(updateWrapper);
-            ResponseVO<T> result = new ResponseVO.Builder<T>().ok();
-            result.setData(dbEntity);
+            
+            ResponseVO<T> respData = new ResponseVO.Builder<T>().ok();
+            respData.setData(dbEntity);
 
-            return result;
+            return respData;
         }
         return new ResponseVO.Builder<T>().err();
     }
@@ -230,17 +276,19 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
     @ResponseBody
     @RequestMapping(value = "/remove.json", method = { RequestMethod.POST })
     public ResponseVO<T> remove(@RequestBody(required=false) RequestVO<T> reqData) {
-        boolean isPass = preHandle(reqData);
+        boolean isPass = checkParams(reqData);
         if (!isPass) {
             return new ResponseVO.Builder<T>().illegal();
         }
-        ResponseVO<T> respData = new ResponseVO.Builder<T>().ok();
-
-        T entity = reqData.getEntity();
-        QueryWrapper<T> queryWrapper = new QueryWrapper<>(entity);
+        
+        Wrapper<T> queryWrapper = preHandle(reqData, MethodTypeEnum.QUERY.getCode());
+        if(null == queryWrapper) {
+            return new ResponseVO.Builder<T>().ok();
+        }
         boolean flag = getService().remove(queryWrapper);
         if (flag) {
-            respData.setData(entity);
+            ResponseVO<T> respData = new ResponseVO.Builder<T>().ok();
+            respData.setData(reqData.getEntity());
             return respData;
         }
         return new ResponseVO.Builder<T>().err();
@@ -250,22 +298,15 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
     @ResponseBody
     @RequestMapping(value = "/removeList.json", method = { RequestMethod.POST })
     public ResponseVO<T> removeList(@RequestBody(required=false) ListRequestVO<T> listReqData) {
-        boolean isPass = preHandleList(listReqData);
+        boolean isPass = checkParams(listReqData);
         if (!isPass) {
             return new ResponseVO.Builder<T>().illegal();
         }
 
-        List<T> entityList = listReqData.getEntityList();
-        if(CollectionUtils.isEmpty(entityList)) {
+        Wrapper<T> queryWrapper = preHandle(listReqData, MethodTypeEnum.QUERY.getCode());
+        if(null == queryWrapper) {
             return new ResponseVO.Builder<T>().ok();
         }
-        
-        List<K> idList = Lists.newLinkedList();
-        entityList.stream().forEach(entity -> {
-            idList.add(entity.getId());
-        });
-        QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-        queryWrapper.in("id", idList);
         boolean flag = getService().remove(queryWrapper);
         if (flag) {
             return new ResponseVO.Builder<T>().ok();
@@ -277,7 +318,7 @@ public abstract class BaseController<S extends IBaseService<T, K>, T extends Bas
     @ResponseBody
     @RequestMapping(value = "/batchSave.json", method = { RequestMethod.POST })
     public ResponseVO<T> batchSave(@RequestBody(required=false) BatchRequestVO<T> batchReqData) {
-        boolean isPass = preHandleBatch(batchReqData);
+        boolean isPass = checkParams(batchReqData);
         if (!isPass) {
             return new ResponseVO.Builder<T>().illegal();
         }
