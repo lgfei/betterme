@@ -16,7 +16,7 @@ import com.lgfei.betterme.framework.api.controller.BaseController;
  * </p>
  *
  * @author lgfei
- * @since 2019-07-29
+ * @since 2019-09-01
  */
 @Api(tags = {"用户信息表"})
 @RestController
